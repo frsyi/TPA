@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Iqra;
+use App\Models\Siswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
@@ -37,7 +38,8 @@ class IqraController extends Controller
      */
     public function create()
     {
-        //
+        $siswas = Siswa::all();
+        return view('iqra.create', compact('siswas'));
     }
 
     /**

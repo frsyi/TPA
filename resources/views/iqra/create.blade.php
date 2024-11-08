@@ -26,7 +26,15 @@
 
                         <div class="mb-6">
                             <x-input-label for="jilid" :value="__('Jilid')" />
-                            <x-text-input id="jilid" name="jilid" type="text" class="block w-full mt-1" required autofocus autocomplete="jilid" />
+                            <x-select id="jilid" name="jilid" class="block w-full mt-1" required autofocus autocomplete="jilid">
+                                <option value="">Pilih Jilid</option>
+                                <option value="1">Jilid 1</option>
+                                <option value="2">Jilid 2</option>
+                                <option value="3">Jilid 3</option>
+                                <option value="4">Jilid 4</option>
+                                <option value="5">Jilid 5</option>
+                                <option value="6">Jilid 6</option>
+                            </x-select>
                             <x-input-error class="mt-2" :messages="$errors->get('jilid')" />
                         </div>
 
