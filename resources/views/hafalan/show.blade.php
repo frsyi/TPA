@@ -6,46 +6,46 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-            <div class="overflow-hidden bg-white shadow-sm dark:bg-gray-800 sm:rounded-lg">
+        <div class="mx-auto max-w-4xl sm:px-6 lg:px-8">
+            <div class="overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <div class="mb-6 text-2xl font-bold">Detail Hafalan</div>
-                    <table class="min-w-full bg-white dark:bg-gray-800">
-                        <tbody>
-                            <tr class="dark:border-gray-700">
-                                <td class="px-6 py-4 text-lg font-bold text-gray-900 whitespace-nowrap dark:text-gray-200">Tanggal</td>
-                                <td class="px-6 py-4 text-lg text-gray-900 whitespace-nowrap dark:text-gray-200">{{ $hafalan->created_at->format('d M Y') }}</td>
-                            </tr>
-                            <tr class="dark:border-gray-700">
-                                <td class="px-6 py-4 text-lg font-bold text-gray-900 whitespace-nowrap dark:text-gray-200">Juz</td>
-                                <td class="px-6 py-4 text-lg text-gray-900 whitespace-nowrap dark:text-gray-200">{{ $hafalan->juz->juz }}</td>
-                            </tr>
-                            <tr class="dark:border-gray-700">
-                                <td class="px-6 py-4 text-lg font-bold text-gray-900 whitespace-nowrap dark:text-gray-200">Surat</td>
-                                <td class="px-6 py-4 text-lg text-gray-900 whitespace-nowrap dark:text-gray-200">{{ $hafalan->surat->nama_surat }}</td>
-                            </tr>
-                            <tr class="dark:border-gray-700">
-                                <td class="px-6 py-4 text-lg font-bold text-gray-900 whitespace-nowrap dark:text-gray-200">Mulai Ayat</td>
-                                <td class="px-6 py-4 text-lg text-gray-900 whitespace-nowrap dark:text-gray-200">{{ $hafalan->mulai_ayat }}</td>
-                            </tr>
-                            <tr class="dark:border-gray-700">
-                                <td class="px-6 py-4 text-lg font-bold text-gray-900 whitespace-nowrap dark:text-gray-200">Sampai Ayat</td>
-                                <td class="px-6 py-4 text-lg text-gray-900 whitespace-nowrap dark:text-gray-200">{{ $hafalan->akhir_ayat }}</td>
-                            </tr>
-                            <tr class="dark:border-gray-700">
-                                <td class="px-6 py-4 text-lg font-bold text-gray-900 whitespace-nowrap dark:text-gray-200">Nilai</td>
-                                <td class="px-6 py-4 text-lg text-gray-900 whitespace-nowrap dark:text-gray-200">{{ $hafalan->nilai }}</td>
-                            </tr>
-                            <tr class="dark:border-gray-700">
-                                <td class="px-6 py-4 text-lg font-bold text-gray-900 whitespace-nowrap dark:text-gray-200">Catatan</td>
-                                <td class="px-6 py-4 text-lg text-gray-900 whitespace-nowrap dark:text-gray-200">{{ $hafalan->catatan }}</td>
-                            </tr>
-                            <tr class="dark:border-gray-700">
-                                <td class="px-6 py-4 text-lg font-bold text-gray-900 whitespace-nowrap dark:text-gray-200">Pengajar</td>
-                                <td class="px-6 py-4 text-lg text-gray-900 whitespace-nowrap dark:text-gray-200">{{ $hafalan->pengajar->name }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="mb-4 text-xl font-semibold text-center border-b border-gray-300 dark:border-gray-700 pb-2">
+                        Detail Hafalan
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8">
+                        <div>
+                            <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Tanggal</p>
+                            <p class="text-base font-semibold text-gray-900 dark:text-gray-200">{{ $hafalan->created_at->format('d M Y') }}</p>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Juz</p>
+                            <p class="text-base font-semibold text-gray-900 dark:text-gray-200">{{ $hafalan->juz->juz }}</p>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Surat</p>
+                            <p class="text-base font-semibold text-gray-900 dark:text-gray-200">{{ $hafalan->surat->nama_surat }}</p>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Mulai Ayat</p>
+                            <p class="text-base font-semibold text-gray-900 dark:text-gray-200">{{ $hafalan->mulai_ayat }}</p>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Sampai Ayat</p>
+                            <p class="text-base font-semibold text-gray-900 dark:text-gray-200">{{ $hafalan->akhir_ayat }}</p>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Nilai</p>
+                            <p class="text-base font-semibold text-gray-900 dark:text-gray-200">{{ $hafalan->nilai }}</p>
+                        </div>
+                        <div class="col-span-1 md:col-span-2">
+                            <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Catatan</p>
+                            <p class="text-base font-semibold text-gray-900 dark:text-gray-200">{{ $hafalan->catatan }}</p>
+                        </div>
+                        <div class="col-span-1 md:col-span-2">
+                            <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Pengajar</p>
+                            <p class="text-base font-semibold text-gray-900 dark:text-gray-200">{{ $hafalan->pengajar->name }}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

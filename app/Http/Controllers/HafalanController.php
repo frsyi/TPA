@@ -80,7 +80,7 @@ class HafalanController extends Controller
             'hafalan_id' => $hafalan->id,
         ]);
 
-        return redirect()->route('hafalan.index')->with('success', 'Hafalan created successfully.');
+        return redirect()->route('hafalan.index')->with('success', 'Data hafalan berhasil ditambahkan!');
     }
 
     /**
@@ -98,8 +98,8 @@ class HafalanController extends Controller
     {
         $siswas = Siswa::all();
         $juzs = Juz::all();
-        $surats = Surat::all();
-        return view('hafalan.edit', compact('hafalan', 'juzs', 'siswas', 'surats'));
+        $surats = Surat::where('juz_id', $juzs->first()->id)->get();
+        return view('hafalan.edit', compact('hafalan',  'siswas',  'juzs',  'surats'));
     }
 
     /**
@@ -133,7 +133,7 @@ class HafalanController extends Controller
             'hafalan_id' => $hafalan->id,
         ]);
 
-        return redirect()->route('hafalan.index')->with('success', 'Hafalan updated successfully.');
+        return redirect()->route('hafalan.index')->with('success', 'Data hafalan berhasil diupdate!');
     }
 
     /**
@@ -149,6 +149,6 @@ class HafalanController extends Controller
 
         $hafalan->delete();
 
-        return redirect()->route('hafalan.index')->with('success', 'Hafalan deleted successfully.');
+        return redirect()->route('hafalan.index')->with('success', 'Data hafalan berhasil dihapus!');
     }
 }

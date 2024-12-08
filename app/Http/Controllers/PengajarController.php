@@ -63,23 +63,35 @@ class PengajarController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $user)
+    public function edit($id)
     {
-        $pengajars = User::where('role', User::ROLE_PENGAJAR)->get();
-        return view('pengajar.edit', compact('pengajars'));
+        $pengajar = User::where('role', User::ROLE_PENGAJAR)->findOrFail($id);
+        return view('pengajar.edit', compact('pengajar'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, $id)
     {
+        $pengajar = User::where('role', User::ROLE_PENGAJAR)->findOrFail($id);
+
         $request->validate([
             'name' => 'required|string|max:255',
             'phone_number' => 'required|string|max:13',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $pengajar->id,
+            'password' => 'nullable|string|min:8|confirmed',
         ]);
+
+        $pengajar->update([
+            'name' => $request->name,
+            'phone_number' => $request->phone_number,
+            'email' => $request->email,
+            'password' => $request->password ? Hash::make($request->password) : $pengajar->password,
+            'role' => User::ROLE_PENGAJAR,
+        ]);
+
+        return redirect()->route('pengajar.index')->with('success', 'Pengajar berhasil diupdate.');
     }
 
     /**
@@ -87,7 +99,12 @@ class PengajarController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        if ($user->role === 'pengajar') {
+            $user->delete();
+
+            return redirect()->route('pengajar.index')
+                ->with('success', 'Data Pengajar berhasil dihapus!');
+        }
     }
 
     public function showAllActivityLogs()

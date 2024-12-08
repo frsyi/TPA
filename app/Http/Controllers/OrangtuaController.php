@@ -58,7 +58,7 @@ class OrangtuaController extends Controller
      */
     public function show($id)
     {
-        $orangtua = User::where('role', User::ROLE_ORANGTUA)->findOrFail($id);
+        $orangtua = User::where('role', User::ROLE_ORANGTUA)->with('siswa')->findOrFail($id);
 
         return view('orangtua.show', compact('orangtua'));
     }
@@ -66,24 +66,50 @@ class OrangtuaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $orangtua = User::where('role', User::ROLE_ORANGTUA)->findOrFail($id);
+        $siswas = Siswa::all();
+
+        return view('orangtua.edit', compact('orangtua', 'siswas'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $orangtua = User::where('role', User::ROLE_ORANGTUA)->findOrFail($id);
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'phone_number' => 'required|string|max:13',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $orangtua->id,
+            'password' => 'nullable|string|min:8|confirmed',
+            'siswa_id' => 'required|exists:siswas,id',
+        ]);
+
+        $orangtua->update([
+            'name' => $request->name,
+            'phone_number' => $request->phone_number,
+            'email' => $request->email,
+            'siswa_id' => $request->siswa_id,
+            'password' => $request->password ? Hash::make($request->password) : $orangtua->password,
+        ]);
+
+        return redirect()->route('orangtua.index')->with('success', 'Data Orangtua berhasil diperbarui.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $user)
     {
-        //
+        if ($user->role === 'orangtua') {
+            $user->delete();
+
+            return redirect()->route('orangtua.index')
+                ->with('success', 'Data Orangtua berhasil dihapus!');
+        }
     }
 }

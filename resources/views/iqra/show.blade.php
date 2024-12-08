@@ -17,14 +17,6 @@
                                 <td class="px-6 py-4 text-lg text-gray-900 whitespace-nowrap dark:text-gray-200">{{ $iqra->created_at->format('d M Y') }}</td>
                             </tr>
                             <tr class="dark:border-gray-700">
-                                <td class="px-6 py-4 text-lg font-bold text-gray-900 whitespace-nowrap dark:text-gray-200">Juz</td>
-                                <td class="px-6 py-4 text-lg text-gray-900 whitespace-nowrap dark:text-gray-200">{{ $iqra->juz->juz }}</td>
-                            </tr>
-                            <tr class="dark:border-gray-700">
-                                <td class="px-6 py-4 text-lg font-bold text-gray-900 whitespace-nowrap dark:text-gray-200">Surat</td>
-                                <td class="px-6 py-4 text-lg text-gray-900 whitespace-nowrap dark:text-gray-200">{{ $iqra->surat->nama_surat }}</td>
-                            </tr>
-                            <tr class="dark:border-gray-700">
                                 <td class="px-6 py-4 text-lg font-bold text-gray-900 whitespace-nowrap dark:text-gray-200">Jilid</td>
                                 <td class="px-6 py-4 text-lg text-gray-900 whitespace-nowrap dark:text-gray-200">{{ $iqra->jilid }}</td>
                             </tr>

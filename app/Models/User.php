@@ -60,9 +60,9 @@ class User extends Authenticatable
         return $this->hasMany(Hafalan::class);
     }
 
-    public function siswas()
+    public function siswa()
     {
-        return $this->hasMany(Siswa::class);
+        return $this->belongsTo(Siswa::class);
     }
 
     public function activityLogs()

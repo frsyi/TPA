@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Iqra;
 use App\Models\Siswa;
+use App\Models\ActivityLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class IqraController extends Controller
 {
@@ -47,13 +49,36 @@ class IqraController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'siswa_id' => 'required|integer|exists:siswas,id',
+            'jilid' => 'required|integer',
+            'halaman' => 'required|integer',
+            'nilai' => 'required|string|max:255',
+            'catatan' => 'nullable|string',
+        ]);
+
+        $iqra = Iqra::create([
+            'siswa_id' => $request->siswa_id,
+            'jilid' => $request->jilid,
+            'halaman' => $request->halaman,
+            'nilai' => $request->nilai,
+            'catatan' => $request->catatan,
+            'pengajar_id' => Auth::id(),
+        ]);
+
+        ActivityLog::create([
+            'pengajar_id' => Auth::id(),
+            'activity' => 'create-iqra',
+            'iqra_id' => $iqra->id,
+        ]);
+
+        return redirect()->route('iqra.index')->with('success', 'Data iqra berhasil ditambahkan!.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Iqra $iqra)
     {
         return view('iqra.show', compact('iqra'));
     }
@@ -61,24 +86,56 @@ class IqraController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Iqra $iqra)
     {
-        //
+        $siswas = Siswa::all();
+        return view('iqra.edit', compact('iqra', 'siswas'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Iqra $iqra)
     {
-        //
+        $request->validate([
+            'siswa_id' => 'required|integer|exists:siswas,id',
+            'jilid' => 'required|integer',
+            'halaman' => 'required|integer',
+            'nilai' => 'required|string|max:255',
+            'catatan' => 'nullable|string',
+        ]);
+
+        $iqra->update([
+            'siswa_id' => $request->siswa_id,
+            'jilid' => $request->jilid,
+            'halaman' => $request->halaman,
+            'nilai' => $request->nilai,
+            'catatan' => $request->catatan,
+            'pengajar_id' => Auth::id(),
+        ]);
+
+        ActivityLog::create([
+            'pengajar_id' => Auth::id(),
+            'activity' => 'update-iqra',
+            'iqra_id' => $iqra->id,
+        ]);
+
+        return redirect()->route('iqra.index')->with('success', 'Data iqra berhasil diupdate!.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Iqra $iqra)
     {
-        //
+        ActivityLog::create([
+            'pengajar_id' => Auth::id(),
+            'activity' => 'delete-iqra',
+            'iqra_id' => $iqra->id,
+        ]);
+
+        $iqra->delete();
+
+        return redirect()->route('iqra.index')->with('success', 'Data iqra berhasil dihapus!');
     }
 }
