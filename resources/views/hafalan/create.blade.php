@@ -61,7 +61,12 @@
 
                         <div class="mb-6">
                             <x-input-label for="nilai" :value="__('Nilai')" />
-                            <x-text-input id="nilai" name="nilai" type="text" class="block w-full mt-1" required autofocus autocomplete="nilai" />
+                            <x-select id="nilai" name="nilai" type="text" class="block w-full mt-1" required autofocus autocomplete="nilai">
+                                <option value="">Masukkan Nilai</option>
+                                <option value="1">Belum mampu</option>
+                                <option value="2">Cukup</option>
+                                <option value="3">Mampu</option>
+                            </x-select>
                             <x-input-error class="mt-2" :messages="$errors->get('nilai')" />
                         </div>
 
@@ -88,12 +93,10 @@
             var mulaiAyatSelect = document.getElementById('mulai_ayat');
             var akhirAyatSelect = document.getElementById('akhir_ayat');
 
-            // Clear existing options
             suratSelect.innerHTML = '<option value="" disabled selected>Pilih Surat</option>';
             mulaiAyatSelect.innerHTML = '<option value="" disabled selected>Pilih Mulai Ayat</option>';
             akhirAyatSelect.innerHTML = '<option value="" disabled selected>Pilih Sampai Ayat</option>';
 
-            // Fetch surat options based on juzId via Ajax
             fetch(`/api/juzs/${juzId}/surats`)
                 .then(response => response.json())
                 .then(data => {
@@ -112,11 +115,9 @@
             var mulaiAyatSelect = document.getElementById('mulai_ayat');
             var akhirAyatSelect = document.getElementById('akhir_ayat');
 
-            // Clear existing options
             mulaiAyatSelect.innerHTML = '<option value="" disabled selected>Pilih Mulai Ayat</option>';
             akhirAyatSelect.innerHTML = '<option value="" disabled selected>Pilih Sampai Ayat</option>';
 
-            // Fetch ayat options based on suratId via Ajax
             fetch(`/api/surats/${suratId}/ayats`)
                 .then(response => response.json())
                 .then(data => {
