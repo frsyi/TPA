@@ -40,7 +40,7 @@ class IqraController extends Controller
      */
     public function create()
     {
-        $siswas = Siswa::all();
+        $siswas = Siswa::orderBy('nama', 'asc')->get();
         return view('iqra.create', compact('siswas'));
     }
 
@@ -88,7 +88,7 @@ class IqraController extends Controller
      */
     public function edit(Iqra $iqra)
     {
-        $siswas = Siswa::all();
+        $siswas = Siswa::orderBy('nama', 'asc')->get();
         return view('iqra.edit', compact('iqra', 'siswas'));
     }
 

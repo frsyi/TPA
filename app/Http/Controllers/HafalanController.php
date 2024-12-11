@@ -42,7 +42,7 @@ class HafalanController extends Controller
      */
     public function create()
     {
-        $siswas = Siswa::all();
+        $siswas = Siswa::orderBy('nama', 'asc')->get();
         $juzs = Juz::all();
         $surats = Surat::where('juz_id', $juzs->first()->id)->get();
         return view('hafalan.create', compact('siswas', 'juzs', 'surats'));
@@ -96,7 +96,7 @@ class HafalanController extends Controller
      */
     public function edit(Hafalan $hafalan)
     {
-        $siswas = Siswa::all();
+        $siswas = Siswa::orderBy('nama', 'asc')->get();
         $juzs = Juz::all();
         $surats = Surat::where('juz_id', $juzs->first()->id)->get();
         return view('hafalan.edit', compact('hafalan',  'siswas',  'juzs',  'surats'));

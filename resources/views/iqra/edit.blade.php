@@ -57,4 +57,13 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#siswa_id').select2({
+                allowClear: true,
+                width: '100%',
+            });
+        });
+    </script>
 </x-app-layout>

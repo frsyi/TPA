@@ -15,8 +15,8 @@
 
                         <div class="mb-6">
                             <x-input-label for="siswa_id" :value="__('Nama Siswa')" />
-                            <x-select id="siswa_id" name="siswa_id" class="block w-full mt-1" required autofocus autocomplete="siswa_id">
-                                <option value="" disabled>Pilih Nama Siswa</option>
+                            <x-select id="siswa_id" name="siswa_id" class="block w-full mt-1 select2" required autofocus autocomplete="siswa_id">
+                                <option value="" disabled>Cari Nama Siswa</option>
                                 @foreach ($siswas as $siswa)
                                     <option value="{{ $siswa->id }}" {{ $hafalan->siswa_id == $siswa->id ? 'selected' : '' }}>{{ $siswa->nama }}</option>
                                 @endforeach
@@ -91,18 +91,23 @@
     </div>
 
     <script>
+        $(document).ready(function() {
+            $('#siswa_id').select2({
+                allowClear: true,
+                width: '100%',
+            });
+        });
+
         document.getElementById('juz_id').addEventListener('change', function() {
             var juzId = this.value;
             var suratSelect = document.getElementById('surat_id');
             var mulaiAyatSelect = document.getElementById('mulai_ayat');
             var akhirAyatSelect = document.getElementById('akhir_ayat');
 
-            // Clear existing options
             suratSelect.innerHTML = '<option value="" disabled selected>Pilih Surat</option>';
             mulaiAyatSelect.innerHTML = '<option value="" disabled selected>Pilih Mulai Ayat</option>';
             akhirAyatSelect.innerHTML = '<option value="" disabled selected>Pilih Sampai Ayat</option>';
 
-            // Fetch surat options based on juzId via Ajax
             fetch(`/api/juzs/${juzId}/surats`)
                 .then(response => response.json())
                 .then(data => {
@@ -121,11 +126,9 @@
             var mulaiAyatSelect = document.getElementById('mulai_ayat');
             var akhirAyatSelect = document.getElementById('akhir_ayat');
 
-            // Clear existing options
             mulaiAyatSelect.innerHTML = '<option value="" disabled selected>Pilih Mulai Ayat</option>';
             akhirAyatSelect.innerHTML = '<option value="" disabled selected>Pilih Sampai Ayat</option>';
 
-            // Fetch ayat options based on suratId via Ajax
             fetch(`/api/surats/${suratId}/ayats`)
                 .then(response => response.json())
                 .then(data => {

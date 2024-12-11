@@ -15,8 +15,8 @@
 
                         <div class="mb-6">
                             <x-input-label for="siswa_id" :value="__('Nama Siswa')" />
-                            <x-select id="siswa_id" name="siswa_id" class="block w-full mt-1" required autofocus autocomplete="siswa_id">
-                                <option value="" disabled selected>Pilih Nama Siswa</option>
+                            <x-select id="siswa_id" name="siswa_id" class="block w-full mt-1 select2" required>
+                                <option value="">Cari Nama Siswa</option>
                                 @foreach ($siswas as $siswa)
                                     <option value="{{ $siswa->id }}">{{ $siswa->nama }}</option>
                                 @endforeach
@@ -70,4 +70,13 @@
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#siswa_id').select2({
+                allowClear: true,
+                width: '100%',
+            });
+        });
+    </script>
 </x-app-layout>
