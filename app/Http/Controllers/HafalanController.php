@@ -53,15 +53,20 @@ class HafalanController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'siswa_id' => 'required|integer|exists:siswas,id',
-            'juz_id' => 'required|integer|exists:juzs,id',
-            'surat_id' => 'required|integer|exists:surats,id',
-            'mulai_ayat' => 'required|integer',
-            'akhir_ayat' => 'required|integer',
-            'nilai' => 'required|string|max:255',
-            'catatan' => 'nullable|string',
-        ]);
+        $request->validate(
+            [
+                'siswa_id' => 'required|integer|exists:siswas,id',
+                'juz_id' => 'required|integer|exists:juzs,id',
+                'surat_id' => 'required|integer|exists:surats,id',
+                'mulai_ayat' => 'required|integer',
+                'akhir_ayat' => 'required|integer|gt:mulai_ayat',
+                'nilai' => 'required|string|max:255',
+                'catatan' => 'nullable|string',
+            ],
+            [
+                'akhir_ayat.gt' => 'Akhir ayat harus lebih besar dari ayat mulai.',
+            ]
+        );
 
         $hafalan = Hafalan::create([
             'siswa_id' => $request->siswa_id,
@@ -107,15 +112,20 @@ class HafalanController extends Controller
      */
     public function update(Request $request, Hafalan $hafalan)
     {
-        $request->validate([
-            'siswa_id' => 'required|integer|exists:siswas,id',
-            'juz_id' => 'required|integer|exists:juzs,id',
-            'surat_id' => 'required|integer|exists:surats,id',
-            'mulai_ayat' => 'required|integer',
-            'akhir_ayat' => 'required|integer',
-            'nilai' => 'required|string|max:255',
-            'catatan' => 'nullable|string',
-        ]);
+        $request->validate(
+            [
+                'siswa_id' => 'required|integer|exists:siswas,id',
+                'juz_id' => 'required|integer|exists:juzs,id',
+                'surat_id' => 'required|integer|exists:surats,id',
+                'mulai_ayat' => 'required|integer',
+                'akhir_ayat' => 'required|integer|gt:mulai_ayat',
+                'nilai' => 'required|string|max:255',
+                'catatan' => 'nullable|string',
+            ],
+            [
+                'akhir_ayat.gt' => 'Akhir ayat harus lebih besar dari ayat mulai.',
+            ]
+        );
 
         $hafalan->update([
             'siswa_id' => $request->siswa_id,
@@ -150,5 +160,18 @@ class HafalanController extends Controller
         $hafalan->delete();
 
         return redirect()->route('hafalan.index')->with('success', 'Data hafalan berhasil dihapus!');
+    }
+
+    public function getSuratsByJuz($id)
+    {
+        $surats = Surat::where('juz_id', $id)->get();
+        return response()->json($surats);
+    }
+
+    public function getAyatsBySurat($id)
+    {
+        $surat = Surat::find($id);
+        $ayats = range($surat->mulai_ayat, $surat->akhir_ayat);
+        return response()->json($ayats);
     }
 }

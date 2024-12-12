@@ -48,9 +48,9 @@
                             <x-input-label for="nilai" :value="__('Nilai')" />
                             <x-select id="nilai" name="nilai" type="text" class="block w-full mt-1" required autofocus autocomplete="nilai">
                                 <option value="">Masukkan Nilai</option>
-                                <option value="1">Belum mampu</option>
-                                <option value="2">Cukup</option>
-                                <option value="3">Mampu</option>
+                                <option value="Belum mampu">Belum mampu</option>
+                                <option value="Cukup">Cukup</option>
+                                <option value="Mampu">Mampu</option>
                             </x-select>
                             <x-input-error class="mt-2" :messages="$errors->get('nilai')" />
                         </div>

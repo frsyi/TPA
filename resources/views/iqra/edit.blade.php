@@ -26,7 +26,15 @@
 
                         <div class="mb-6">
                             <x-input-label for="jilid" :value="__('Jilid')" />
-                            <x-text-input id="jilid" name="jilid" type="text" class="block w-full mt-1" :value="old('jilid', $iqra->jilid)" required autofocus autocomplete="jilid" />
+                            <x-select id="jilid" name="jilid" class="block w-full mt-1" required>
+                                <option value="" disabled>Pilih Jilid</option>
+                                <option value="1" {{ (old('jilid') ?? $iqra->jilid) == '1' ? 'selected' : '' }}>Jilid 1</option>
+                                <option value="2" {{ (old('jilid') ?? $iqra->jilid) == '2' ? 'selected' : '' }}>Jilid 2</option>
+                                <option value="3" {{ (old('jilid') ?? $iqra->jilid) == '3' ? 'selected' : '' }}>Jilid 3</option>
+                                <option value="4" {{ (old('jilid') ?? $iqra->jilid) == '4' ? 'selected' : '' }}>Jilid 4</option>
+                                <option value="5" {{ (old('jilid') ?? $iqra->jilid) == '5' ? 'selected' : '' }}>Jilid 5</option>
+                                <option value="6" {{ (old('jilid') ?? $iqra->jilid) == '6' ? 'selected' : '' }}>Jilid 6</option>
+                            </x-select>
                             <x-input-error class="mt-2" :messages="$errors->get('jilid')" />
                         </div>
 
@@ -38,7 +46,12 @@
 
                         <div class="mb-6">
                             <x-input-label for="nilai" :value="__('Nilai')" />
-                            <x-text-input id="nilai" name="nilai" type="text" class="block w-full mt-1" :value="old('nilai', $iqra->nilai)" required autofocus autocomplete="nilai" />
+                            <x-select id="nilai" name="nilai" class="block w-full mt-1" required>
+                                <option value="" disabled {{ (old('nilai') ?? $iqra->nilai) == '' ? 'selected' : '' }}>Masukkan Nilai</option>
+                                <option value="Belum mampu" {{ (old('nilai') ?? $iqra->nilai) == 'Belum mampu' ? 'selected' : '' }}>Belum mampu</option>
+                                <option value="Cukup" {{ (old('nilai') ?? $iqra->nilai) == 'Cukup' ? 'selected' : '' }}>Cukup</option>
+                                <option value="Mampu" {{ (old('nilai') ?? $iqra->nilai) == 'Mampu' ? 'selected' : '' }}>Mampu</option>
+                            </x-select>
                             <x-input-error class="mt-2" :messages="$errors->get('nilai')" />
                         </div>
 

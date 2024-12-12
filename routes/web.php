@@ -37,7 +37,11 @@ Route::middleware('auth')->group(function () {
     Route::resource('hafalan', HafalanController::class);
     Route::resource('iqra', IqraController::class);
     Route::resource('orangtua', OrangtuaController::class);
+
+    Route::get('/hafalan/surats/{id}', [HafalanController::class, 'getSuratsByJuz'])->name('hafalan.getSuratsByJuz');
+    Route::get('/hafalan/ayats/{id}', [HafalanController::class, 'getAyatsBySurat'])->name('hafalan.getAyatsBySurat');
 });
+
 Route::get('pengajar/showAllActivityLogs', [PengajarController::class, 'showAllActivityLogs'])->name('pengajar.showAllActivityLogs');
 
 // Route group for admin middleware

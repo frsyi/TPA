@@ -11,12 +11,12 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <form method="post" action="{{ route('hafalan.update', $hafalan->id) }}" class="">
                         @csrf
-                        @method('patch')
+                        @method('put')
 
                         <div class="mb-6">
                             <x-input-label for="siswa_id" :value="__('Nama Siswa')" />
-                            <x-select id="siswa_id" name="siswa_id" class="block w-full mt-1 select2" required autofocus autocomplete="siswa_id">
-                                <option value="" disabled>Cari Nama Siswa</option>
+                            <x-select id="siswa_id" name="siswa_id" class="block w-full mt-1" required>
+                                <option value="">Cari Nama Siswa</option>
                                 @foreach ($siswas as $siswa)
                                     <option value="{{ $siswa->id }}" {{ $hafalan->siswa_id == $siswa->id ? 'selected' : '' }}>{{ $siswa->nama }}</option>
                                 @endforeach
@@ -37,51 +37,47 @@
 
                         <div class="mb-6">
                             <x-input-label for="surat_id" :value="__('Surat')" />
-                            <x-select id="surat_id" name="surat_id" class="block w-full mt-1" required autofocus autocomplete="surat_id">
+                            <x-select id="surat_id" name="surat_id" class="block w-full mt-1" required>
                                 <option value="" disabled>Pilih Surat</option>
-                                @foreach ($surats as $surat)
-                                    <option value="{{ $surat->id }}" {{ $hafalan->surat_id == $surat->id ? 'selected' : '' }}>{{ $surat->nama_surat }}</option>
-                                @endforeach
                             </x-select>
                             <x-input-error class="mt-2" :messages="$errors->get('surat_id')" />
                         </div>
 
                         <div class="mb-6">
                             <x-input-label for="mulai_ayat" :value="__('Mulai Ayat')" />
-                            <x-select id="mulai_ayat" name="mulai_ayat" class="block w-full mt-1" required autofocus autocomplete="mulai_ayat">
-                                <option value="" disabled>Pilih Mulai Ayat</option>
-                                @for ($i = 1; $i <= $hafalan->surat->ayat_count; $i++)
-                                    <option value="{{ $i }}" {{ $hafalan->mulai_ayat == $i ? 'selected' : '' }}>{{ $i }}</option>
-                                @endfor
+                            <x-select id="mulai_ayat" name="mulai_ayat" class="block w-full mt-1" required>
+                                <option value="" disabled>Pilih Ayat</option>
                             </x-select>
                             <x-input-error class="mt-2" :messages="$errors->get('mulai_ayat')" />
                         </div>
 
                         <div class="mb-6">
                             <x-input-label for="akhir_ayat" :value="__('Sampai Ayat')" />
-                            <x-select id="akhir_ayat" name="akhir_ayat" class="block w-full mt-1" required autofocus autocomplete="akhir_ayat">
-                                <option value="" disabled>Pilih Sampai Ayat</option>
-                                @for ($i = 1; $i <= $hafalan->surat->ayat_count; $i++)
-                                    <option value="{{ $i }}" {{ $hafalan->akhir_ayat == $i ? 'selected' : '' }}>{{ $i }}</option>
-                                @endfor
+                            <x-select id="akhir_ayat" name="akhir_ayat" class="block w-full mt-1" required>
+                                <option value="" disabled>Pilih Ayat</option>
                             </x-select>
                             <x-input-error class="mt-2" :messages="$errors->get('akhir_ayat')" />
                         </div>
 
                         <div class="mb-6">
                             <x-input-label for="nilai" :value="__('Nilai')" />
-                            <x-text-input id="nilai" name="nilai" type="text" class="block w-full mt-1" :value="old('nilai', $hafalan->nilai)" required autofocus autocomplete="nilai" />
+                            <x-select id="nilai" name="nilai" type="text" class="block w-full mt-1" required autofocus autocomplete="nilai">
+                                <option value="">Masukkan Nilai</option>
+                                <option value="Belum mampu" {{ $hafalan->nilai == 'Belum mampu' ? 'selected' : '' }}>Belum mampu</option>
+                                <option value="Cukup" {{ $hafalan->nilai == 'Cukup' ? 'selected' : '' }}>Cukup</option>
+                                <option value="Mampu" {{ $hafalan->nilai == 'Mampu' ? 'selected' : '' }}>Mampu</option>
+                            </x-select>
                             <x-input-error class="mt-2" :messages="$errors->get('nilai')" />
                         </div>
 
                         <div class="mb-6">
                             <x-input-label for="catatan" :value="__('Catatan')" />
-                            <x-text-input id="catatan" name="catatan" type="text" class="block w-full mt-1" :value="old('catatan', $hafalan->catatan)" autofocus autocomplete="catatan" />
+                            <x-text-input id="catatan" name="catatan" type="text" class="block w-full mt-1" required autofocus autocomplete="catatan" value="{{ $hafalan->catatan }}" />
                             <x-input-error class="mt-2" :messages="$errors->get('catatan')" />
                         </div>
 
                         <div class="flex items-center gap-4">
-                            <x-primary-button>{{ __('Simpan') }}</x-primary-button>
+                            <x-primary-button>{{ __('Update') }}</x-primary-button>
                             <a href="{{ route('hafalan.index') }}" class="inline-flex items-center px-4 py-2 text-xs font-semibold tracking-widest text-gray-700 uppercase transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md shadow-sm dark:bg-gray-800 dark:border-gray-500 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 disabled:opacity-25">{{ __('Batal') }}</a>
                         </div>
                     </form>
@@ -90,61 +86,71 @@
         </div>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $('#siswa_id').select2({
-                allowClear: true,
-                width: '100%',
+        $(document).ready(function () {
+            $('#siswa_id').select2();
+
+            const suratId = {{ $hafalan->surat_id ?? 'null' }};
+            const mulaiAyat = {{ $hafalan->mulai_ayat ?? 'null' }};
+            const akhirAyat = {{ $hafalan->akhir_ayat ?? 'null' }};
+
+            if (suratId) {
+                loadSurats({{ $hafalan->juz_id }}, suratId);
+                loadAyats(suratId, mulaiAyat, akhirAyat);
+            }
+
+            $('#juz_id').change(function () {
+                let juzId = $(this).val();
+                loadSurats(juzId);
             });
-        });
 
-        document.getElementById('juz_id').addEventListener('change', function() {
-            var juzId = this.value;
-            var suratSelect = document.getElementById('surat_id');
-            var mulaiAyatSelect = document.getElementById('mulai_ayat');
-            var akhirAyatSelect = document.getElementById('akhir_ayat');
+            $('#surat_id').change(function () {
+                let suratId = $(this).val();
+                loadAyats(suratId);
+            });
 
-            suratSelect.innerHTML = '<option value="" disabled selected>Pilih Surat</option>';
-            mulaiAyatSelect.innerHTML = '<option value="" disabled selected>Pilih Mulai Ayat</option>';
-            akhirAyatSelect.innerHTML = '<option value="" disabled selected>Pilih Sampai Ayat</option>';
-
-            fetch(`/api/juzs/${juzId}/surats`)
-                .then(response => response.json())
-                .then(data => {
-                    data.forEach(surat => {
-                        var option = document.createElement('option');
-                        option.value = surat.id;
-                        option.textContent = surat.nama_surat;
-                        suratSelect.appendChild(option);
+            function loadSurats(juzId, selectedSuratId = null) {
+                $('#surat_id').html('<option value="" disabled selected>Memuat...</option>');
+                if (juzId) {
+                    $.ajax({
+                        url: `/hafalan/surats/${juzId}`,
+                        type: 'GET',
+                        success: function (data) {
+                            let options = '<option value="" disabled selected>Pilih Surat</option>';
+                            data.forEach(surat => {
+                                options += `<option value="${surat.id}" ${surat.id == selectedSuratId ? 'selected' : ''}>${surat.nama_surat}</option>`;
+                            });
+                            $('#surat_id').html(options);
+                        }
                     });
-                })
-                .catch(error => console.error('Error fetching surats:', error));
-        });
+                }
+            }
 
-        document.getElementById('surat_id').addEventListener('change', function() {
-            var suratId = this.value;
-            var mulaiAyatSelect = document.getElementById('mulai_ayat');
-            var akhirAyatSelect = document.getElementById('akhir_ayat');
+            function loadAyats(suratId, selectedMulai = null, selectedAkhir = null) {
+                $('#mulai_ayat').html('<option value="" disabled selected>Memuat...</option>');
+                $('#akhir_ayat').html('<option value="" disabled selected>Memuat...</option>');
+                if (suratId) {
+                    $.ajax({
+                        url: `/hafalan/ayats/${suratId}`,
+                        type: 'GET',
+                        success: function (data) {
+                            let options = '<option value="" disabled selected>Pilih Ayat</option>';
+                            data.forEach(ayat => {
+                                options += `<option value="${ayat}" ${ayat == selectedMulai ? 'selected' : ''}>${ayat}</option>`;
+                            });
+                            $('#mulai_ayat').html(options);
 
-            mulaiAyatSelect.innerHTML = '<option value="" disabled selected>Pilih Mulai Ayat</option>';
-            akhirAyatSelect.innerHTML = '<option value="" disabled selected>Pilih Sampai Ayat</option>';
-
-            fetch(`/api/surats/${suratId}/ayats`)
-                .then(response => response.json())
-                .then(data => {
-                    data.forEach(ayat => {
-                        var optionMulai = document.createElement('option');
-                        optionMulai.value = ayat;
-                        optionMulai.textContent = ayat;
-                        mulaiAyatSelect.appendChild(optionMulai);
-
-                        var optionAkhir = document.createElement('option');
-                        optionAkhir.value = ayat;
-                        optionAkhir.textContent = ayat;
-                        akhirAyatSelect.appendChild(optionAkhir);
+                            options = '<option value="" disabled selected>Pilih Ayat</option>';
+                            data.forEach(ayat => {
+                                options += `<option value="${ayat}" ${ayat == selectedAkhir ? 'selected' : ''}>${ayat}</option>`;
+                            });
+                            $('#akhir_ayat').html(options);
+                        }
                     });
-                })
-                .catch(error => console.error('Error fetching ayats:', error));
+                }
+            }
         });
     </script>
 </x-app-layout>

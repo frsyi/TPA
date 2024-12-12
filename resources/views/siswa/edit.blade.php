@@ -19,11 +19,11 @@
                         </div>
                         <div class="mb-6">
                             <x-input-label for="jenis_kelamin" :value="__('Jenis Kelamin')" />
-                            <select id="jenis_kelamin" name="jenis_kelamin" class="block w-full mt-1 border-gray-300 rounded-md shadow-sm dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-300 focus:border-indigo-500 focus:ring-indigo-500" required>
+                            <x-select id="jenis_kelamin" name="jenis_kelamin" class="block w-full mt-1" required>
                                 <option value="" disabled {{ old('jenis_kelamin', $siswa->jenis_kelamin) == '' ? 'selected' : '' }}>Pilih Jenis Kelamin</option>
                                 <option value="Laki-laki" {{ old('jenis_kelamin', $siswa->jenis_kelamin) == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
                                 <option value="Perempuan" {{ old('jenis_kelamin', $siswa->jenis_kelamin) == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
-                            </select>
+                            </x-select>
                             <x-input-error class="mt-2" :messages="$errors->get('jenis_kelamin')" />
                         </div>
                         <div class="mb-6">

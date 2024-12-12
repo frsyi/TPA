@@ -18,7 +18,3 @@ use App\Http\Controllers\Api\JuzSuratController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-
-Route::get('/juzs/{juz}/surats', [JuzSuratController::class, 'suratsByJuz']);
-Route::get('/surats/{surat}/ayats', [JuzSuratController::class, 'ayatsBySurat']);

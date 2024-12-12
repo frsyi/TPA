@@ -8,16 +8,16 @@ use Illuminate\Http\Request;
 
 class JuzSuratController extends Controller
 {
-    public function suratsByJuz($juz)
-    {
-        $surats = Surat::where('juz_id', $juz)->get();
-        return response()->json($surats);
-    }
+    // public function getSuratsByJuz($id)
+    // {
+    //     $surats = Surat::where('juz_id', $id)->get();
+    //     return response()->json($surats);
+    // }
 
-    public function ayatsBySurat($surat)
-    {
-        $surat = Surat::find($surat);
-        $ayats = range($surat->mulai_ayat, $surat->akhir_ayat);
-        return response()->json($ayats);
-    }
+    // public function getAyatsBySurat($id)
+    // {
+    //     $surat = Surat::find($id);
+    //     $ayats = range($surat->mulai_ayat, $surat->akhir_ayat);
+    //     return response()->json($ayats);
+    // }
 }
