@@ -8,6 +8,7 @@
     <div class="sm:py-12">
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="overflow-hidden bg-white dark:bg-gray-800 sm:shadow-sm sm:rounded-lg">
+                @can('admin')
                 <div class="p-6 text-xl text-gray-900 dark:text-gray-100">
                     <div class="flex items-center justify-between">
                         <div>
@@ -27,14 +28,17 @@
                         </div>
                     </div>
                 </div>
+                @endcan
 
                 <div class="p-6">
                     <!-- Search and Filter Form -->
                     <form method="GET" action="{{ route('hafalan.index') }}">
                         <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+                            @can('admin')
                             <div>
                                 <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari Nama Siswa" class="w-full px-4 py-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200">
                             </div>
+                            @endcan
                             <div>
                                 <input type="month" name="date" value="{{ request('date') }}" class="w-full px-4 py-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200">
                             </div>
@@ -86,6 +90,7 @@
                                             <a href="{{ route('hafalan.show', $hafalan->id) }}" class="text-blue-600 dark:text-blue-400">
                                                 <x-heroicon-o-eye class="w-6 h-6"/>
                                             </a>
+                                            @can('admin')
                                             <a href="{{ route('hafalan.edit', $hafalan->id) }}" class="text-yellow-600 dark:text-yellow-400">
                                                 <x-heroicon-o-pencil-square class="w-6 h-6"/>
                                             </a>
@@ -96,6 +101,7 @@
                                                     <x-heroicon-o-trash class="w-6 h-6"/>
                                                 </button>
                                             </form>
+                                            @endcan
                                         </div>
                                     </td>
                                 </tr>

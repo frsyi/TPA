@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Juz;
+use App\Models\User;
 use App\Models\Siswa;
 use App\Models\Surat;
 use App\Models\Hafalan;
@@ -18,21 +19,31 @@ class HafalanController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Hafalan::query();
+        $user = auth()->user();
 
-        if ($request->filled('search')) {
-            $query->whereHas('siswa', function ($q) use ($request) {
-                $q->where('nama', 'like', '%' . $request->search . '%');
-            });
+        if ($user->role === User::ROLE_ORANGTUA) {
+            if ($user->siswa) {
+                $hafalans = $user->siswa->hafalans()->get();
+            } else {
+                $hafalans = collect();
+            }
+        } else {
+            $query = Hafalan::query();
+
+            if ($request->filled('search')) {
+                $query->whereHas('siswa', function ($q) use ($request) {
+                    $q->where('nama', 'like', '%' . $request->search . '%');
+                });
+            }
+
+            if ($request->filled('date')) {
+                $date = Carbon::parse($request->date);
+                $query->whereMonth('created_at', $date->month)
+                    ->whereYear('created_at', $date->year);
+            }
+
+            $hafalans = $query->with('siswa', 'pengajar')->paginate(10);
         }
-
-        if ($request->filled('date')) {
-            $date = Carbon::parse($request->date);
-            $query->whereMonth('created_at', $date->month)
-                ->whereYear('created_at', $date->year);
-        }
-
-        $hafalans = $query->with('siswa', 'pengajar')->get();
 
         return view('hafalan.index', compact('hafalans'));
     }

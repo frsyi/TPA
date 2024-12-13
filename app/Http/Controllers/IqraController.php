@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Iqra;
+use App\Models\User;
 use App\Models\Siswa;
 use App\Models\ActivityLog;
 use Illuminate\Http\Request;
@@ -16,21 +17,31 @@ class IqraController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Iqra::query();
+        $user = auth()->user();
 
-        if ($request->filled('search')) {
-            $query->whereHas('siswa', function ($q) use ($request) {
-                $q->where('nama', 'like', '%' . $request->search . '%');
-            });
+        if ($user->role === User::ROLE_ORANGTUA) {
+            if ($user->siswa) {
+                $iqras = $user->siswa->iqras()->get();
+            } else {
+                $iqras = collect();
+            }
+        } else {
+            $query = Iqra::query();
+
+            if ($request->filled('search')) {
+                $query->whereHas('siswa', function ($q) use ($request) {
+                    $q->where('nama', 'like', '%' . $request->search . '%');
+                });
+            }
+
+            if ($request->filled('date')) {
+                $date = Carbon::parse($request->date);
+                $query->whereMonth('created_at', $date->month)
+                    ->whereYear('created_at', $date->year);
+            }
+
+            $iqras = $query->with('siswa', 'pengajar')->get();
         }
-
-        if ($request->filled('date')) {
-            $date = Carbon::parse($request->date);
-            $query->whereMonth('created_at', $date->month)
-                ->whereYear('created_at', $date->year);
-        }
-
-        $iqras = $query->with('siswa', 'pengajar')->get();
 
         return view('iqra.index', compact('iqras'));
     }

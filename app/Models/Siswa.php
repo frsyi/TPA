@@ -20,6 +20,11 @@ class Siswa extends Model
         return $this->hasMany(Hafalan::class);
     }
 
+    public function iqras()
+    {
+        return $this->hasMany(Iqra::class);
+    }
+
     public function orangTua()
     {
         return $this->belongsTo(User::class, 'orangtua_id');
