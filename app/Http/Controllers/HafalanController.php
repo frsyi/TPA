@@ -23,7 +23,7 @@ class HafalanController extends Controller
 
         if ($user->role === User::ROLE_ORANGTUA) {
             if ($user->siswa) {
-                $hafalans = $user->siswa->hafalans()->get();
+                $hafalans = $user->siswa->hafalans()->paginate(10);
             } else {
                 $hafalans = collect();
             }
@@ -92,7 +92,7 @@ class HafalanController extends Controller
 
         ActivityLog::create([
             'pengajar_id' => Auth::id(),
-            'activity' => 'create-hafalan',
+            'activity' => 'Menambah data hafalan',
             'hafalan_id' => $hafalan->id,
         ]);
 
@@ -150,7 +150,7 @@ class HafalanController extends Controller
 
         ActivityLog::create([
             'pengajar_id' => Auth::id(),
-            'activity' => 'update-hafalan',
+            'activity' => 'Mengubah data hafalan',
             'hafalan_id' => $hafalan->id,
         ]);
 
@@ -164,7 +164,7 @@ class HafalanController extends Controller
     {
         ActivityLog::create([
             'pengajar_id' => Auth::id(),
-            'activity' => 'delete-hafalan',
+            'activity' => 'Menghapus data hafalan',
             'hafalan_id' => $hafalan->id,
         ]);
 

@@ -38,6 +38,9 @@
                         <x-nav-link :href="route('pengajar.index')" :active="request()->routeIs('pengajar.*')">
                             {{ __('Pengajar') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('activity-logs.index')" :active="request()->routeIs('activity-logs.index')">
+                            {{ __('Aktivitas Pengajar') }}
+                        </x-nav-link>
                     @endcan
                 </div>
             </div>
@@ -121,6 +124,9 @@
             @can('pengurus')
                 <x-responsive-nav-link :href="route('pengajar.index')" :active="request()->routeIs('pengajar.*')">
                     {{ __('Pengajar') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('activity-logs.index')" :active="request()->routeIs('activity-logs.index')">
+                    {{ __('Aktivitas Pengajar') }}
                 </x-responsive-nav-link>
             @endcan
         </div>

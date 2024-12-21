@@ -40,7 +40,7 @@ class IqraController extends Controller
                     ->whereYear('created_at', $date->year);
             }
 
-            $iqras = $query->with('siswa', 'pengajar')->get();
+            $iqras = $query->with('siswa', 'pengajar')->paginate(10);
         }
 
         return view('iqra.index', compact('iqras'));
@@ -79,7 +79,7 @@ class IqraController extends Controller
 
         ActivityLog::create([
             'pengajar_id' => Auth::id(),
-            'activity' => 'create-iqra',
+            'activity' => 'Menambah data iqra',
             'iqra_id' => $iqra->id,
         ]);
 
@@ -127,7 +127,7 @@ class IqraController extends Controller
 
         ActivityLog::create([
             'pengajar_id' => Auth::id(),
-            'activity' => 'update-iqra',
+            'activity' => 'Mengubah data iqra',
             'iqra_id' => $iqra->id,
         ]);
 
@@ -141,7 +141,7 @@ class IqraController extends Controller
     {
         ActivityLog::create([
             'pengajar_id' => Auth::id(),
-            'activity' => 'delete-iqra',
+            'activity' => 'Menghapus data iqra',
             'iqra_id' => $iqra->id,
         ]);
 

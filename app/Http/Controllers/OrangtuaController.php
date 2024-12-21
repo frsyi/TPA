@@ -14,7 +14,7 @@ class OrangtuaController extends Controller
      */
     public function index()
     {
-        $orangtuas = User::where('role', User::ROLE_ORANGTUA)->get();
+        $orangtuas = User::where('role', User::ROLE_ORANGTUA)->paginate(10);
         return view('orangtua.index', compact('orangtuas'));
     }
 

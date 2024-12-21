@@ -15,7 +15,7 @@ class PengajarController extends Controller
      */
     public function index()
     {
-        $pengajars = User::where('role', User::ROLE_PENGAJAR)->get();
+        $pengajars = User::where('role', User::ROLE_PENGAJAR)->paginate(10);
         return view('pengajar.index', compact('pengajars'));
     }
 
@@ -105,13 +105,5 @@ class PengajarController extends Controller
             return redirect()->route('pengajar.index')
                 ->with('success', 'Data Pengajar berhasil dihapus!');
         }
-    }
-
-    public function showAllActivityLogs()
-    {
-        // $activityLogs = ActivityLog::with('pengajar', 'hafalan.siswa', 'hafalan.juz')->get();
-        // Log::info($activityLogs);
-        // dd($activityLogs);
-        return view('pengajar.activity_logs',);
     }
 }
