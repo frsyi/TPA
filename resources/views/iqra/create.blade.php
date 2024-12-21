@@ -15,7 +15,7 @@
 
                         <div class="mb-6">
                             <x-input-label for="siswa_id" :value="__('Nama Siswa')" />
-                            <x-select id="siswa_id" name="siswa_id" class="block w-full mt-1 select2" required>
+                            <x-select id="siswa_id" name="siswa_id" class="block w-full mt-1 select2" required autofocus>
                                 <option value="">Cari Nama Siswa</option>
                                 @foreach ($siswas as $siswa)
                                     <option value="{{ $siswa->id }}">{{ $siswa->nama }}</option>
@@ -26,7 +26,7 @@
 
                         <div class="mb-6">
                             <x-input-label for="jilid" :value="__('Jilid')" />
-                            <x-select id="jilid" name="jilid" class="block w-full mt-1" required autofocus autocomplete="jilid">
+                            <x-select id="jilid" name="jilid" class="block w-full mt-1" required>
                                 <option value="">Pilih Jilid</option>
                                 <option value="1">Jilid 1</option>
                                 <option value="2">Jilid 2</option>
@@ -40,13 +40,13 @@
 
                         <div class="mb-6">
                             <x-input-label for="halaman" :value="__('Halaman')" />
-                            <x-text-input id="halaman" name="halaman" type="text" class="block w-full mt-1" required autofocus autocomplete="halaman" />
+                            <x-text-input id="halaman" name="halaman" type="text" class="block w-full mt-1" required />
                             <x-input-error class="mt-2" :messages="$errors->get('halaman')" />
                         </div>
 
                         <div class="mb-6">
                             <x-input-label for="nilai" :value="__('Nilai')" />
-                            <x-select id="nilai" name="nilai" type="text" class="block w-full mt-1" required autofocus autocomplete="nilai">
+                            <x-select id="nilai" name="nilai" type="text" class="block w-full mt-1" required>
                                 <option value="">Masukkan Nilai</option>
                                 <option value="Belum mampu">Belum mampu</option>
                                 <option value="Cukup">Cukup</option>
@@ -57,7 +57,7 @@
 
                         <div class="mb-6">
                             <x-input-label for="catatan" :value="__('Catatan')" />
-                            <x-text-input id="catatan" name="catatan" type="text" class="block w-full mt-1" required autofocus autocomplete="catatan" />
+                            <x-text-input id="catatan" name="catatan" type="text" class="block w-full mt-1" required />
                             <x-input-error class="mt-2" :messages="$errors->get('catatan')" />
                         </div>
 

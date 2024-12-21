@@ -14,12 +14,12 @@
                         @method('post')
                         <div class="mb-6">
                             <x-input-label for="nama" :value="__('Nama Siswa')" />
-                            <x-text-input id="nama" name="nama" type="text" class="block w-full mt-1" required autofocus autocomplete="nama" />
+                            <x-text-input id="nama" name="nama" type="text" class="block w-full mt-1" required autofocus />
                             <x-input-error class="mt-2" :messages="$errors->get('nama')" />
                         </div>
                         <div class="mb-6">
                             <x-input-label for="jenis_kelamin" :value="__('Jenis Kelamin')" />
-                            <x-select id="jenis_kelamin" name="jenis_kelamin" class="block w-full mt-1">
+                            <x-select id="jenis_kelamin" name="jenis_kelamin" class="block w-full mt-1" required>
                                 <option value="" disabled selected>Pilih Jenis Kelamin</option>
                                 <option value="Laki-laki">Laki-laki</option>
                                 <option value="Perempuan">Perempuan</option>
@@ -28,7 +28,7 @@
                         </div>
                         <div class="mb-6">
                             <x-input-label for="kelas" :value="__('Kelas')" />
-                            <x-text-input id="kelas" name="kelas" type="text" class="block w-full mt-1" required autofocus autocomplete="kelas" />
+                            <x-text-input id="kelas" name="kelas" type="text" class="block w-full mt-1" required />
                             <x-input-error class="mt-2" :messages="$errors->get('kelas')" />
                         </div>
                         <div class="flex items-center gap-4">

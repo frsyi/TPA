@@ -14,7 +14,7 @@
                         @method('patch')
                         <div class="mb-6">
                             <x-input-label for="nama" :value="__('Nama Siswa')" />
-                            <x-text-input id="nama" name="nama" type="text" class="block w-full mt-1" :value="old('nama', $siswa->nama)" required autofocus autocomplete="nama" />
+                            <x-text-input id="nama" name="nama" type="text" class="block w-full mt-1" :value="old('nama', $siswa->nama)" required autofocus />
                             <x-input-error class="mt-2" :messages="$errors->get('nama')" />
                         </div>
                         <div class="mb-6">
@@ -28,7 +28,7 @@
                         </div>
                         <div class="mb-6">
                             <x-input-label for="kelas" :value="__('Kelas')" />
-                            <x-text-input id="kelas" name="kelas" type="text" class="block w-full mt-1" :value="old('kelas', $siswa->kelas)" required autofocus autocomplete="kelas" />
+                            <x-text-input id="kelas" name="kelas" type="text" class="block w-full mt-1" :value="old('kelas', $siswa->kelas)" required />
                             <x-input-error class="mt-2" :messages="$errors->get('kelas')" />
                         </div>
                         <div class="flex items-center gap-4">

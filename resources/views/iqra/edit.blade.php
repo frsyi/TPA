@@ -15,7 +15,7 @@
 
                         <div class="mb-6">
                             <x-input-label for="siswa_id" :value="__('Nama Siswa')" />
-                            <x-select id="siswa_id" name="siswa_id" class="block w-full mt-1" required autofocus autocomplete="siswa_id">
+                            <x-select id="siswa_id" name="siswa_id" class="block w-full mt-1" required autofocus>
                                 <option value="" disabled>Pilih Nama Siswa</option>
                                 @foreach ($siswas as $siswa)
                                     <option value="{{ $siswa->id }}" {{ $iqra->siswa_id == $siswa->id ? 'selected' : '' }}>{{ $siswa->nama }}</option>
@@ -40,7 +40,7 @@
 
                         <div class="mb-6">
                             <x-input-label for="halaman" :value="__('Halaman')" />
-                            <x-text-input id="halaman" name="halaman" type="text" class="block w-full mt-1" :value="old('halaman', $iqra->halaman)" required autofocus autocomplete="halaman" />
+                            <x-text-input id="halaman" name="halaman" type="text" class="block w-full mt-1" :value="old('halaman', $iqra->halaman)" required />
                             <x-input-error class="mt-2" :messages="$errors->get('halaman')" />
                         </div>
 
@@ -57,7 +57,7 @@
 
                         <div class="mb-6">
                             <x-input-label for="catatan" :value="__('Catatan')" />
-                            <x-text-input id="catatan" name="catatan" type="text" class="block w-full mt-1" :value="old('catatan', $iqra->catatan)" autofocus autocomplete="catatan" />
+                            <x-text-input id="catatan" name="catatan" type="text" class="block w-full mt-1" :value="old('catatan', $iqra->catatan)" />
                             <x-input-error class="mt-2" :messages="$errors->get('catatan')" />
                         </div>
 

@@ -57,42 +57,7 @@
                     </table>
 
                     <div class="flex justify-center mt-4 mb-4">
-                        <nav role="navigation" aria-label="Pagination Navigation" class="inline-flex space-x-2">
-                            {{-- Tombol sebelumnya --}}
-                            @if ($logs->onFirstPage())
-                                <span class="px-4 py-2 text-sm text-gray-400 bg-gray-200 rounded-lg cursor-not-allowed dark:bg-gray-700">
-                                    Previous
-                                </span>
-                            @else
-                                <a href="{{ $logs->previousPageUrl() }}" class="px-4 py-2 text-sm text-white bg-blue-600 rounded-lg hover:bg-blue-700">
-                                    Previous
-                                </a>
-                            @endif
-
-                            {{-- Halaman --}}
-                            @foreach ($logs->links()->elements[0] as $page => $url)
-                                @if ($page == $logs->currentPage())
-                                    <span class="px-4 py-2 text-sm text-white bg-blue-600 rounded-lg">
-                                        {{ $page }}
-                                    </span>
-                                @else
-                                    <a href="{{ $url }}" class="px-4 py-2 text-sm text-blue-600 bg-gray-200 rounded-lg hover:bg-blue-300 dark:bg-gray-700 dark:text-gray-200">
-                                        {{ $page }}
-                                    </a>
-                                @endif
-                            @endforeach
-
-                            {{-- Tombol selanjutnya --}}
-                            @if ($logs->hasMorePages())
-                                <a href="{{ $logs->nextPageUrl() }}" class="px-4 py-2 text-sm text-white bg-blue-600 rounded-lg hover:bg-blue-700">
-                                    Next
-                                </a>
-                            @else
-                                <span class="px-4 py-2 text-sm text-gray-400 bg-gray-200 rounded-lg cursor-not-allowed dark:bg-gray-700">
-                                    Next
-                                </span>
-                            @endif
-                        </nav>
+                        {{ $logs->links() }}
                     </div>
 
                 </div>

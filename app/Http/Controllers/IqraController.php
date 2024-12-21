@@ -20,27 +20,26 @@ class IqraController extends Controller
         $user = auth()->user();
 
         if ($user->role === User::ROLE_ORANGTUA) {
-            if ($user->siswa) {
-                $iqras = $user->siswa->iqras()->get();
-            } else {
-                $iqras = collect();
-            }
+            $iqras = $user->siswa ? $user->siswa->iqras()->paginate(10) : collect();
         } else {
-            $query = Iqra::query();
+            $query = Iqra::query()->with('siswa', 'pengajar');
 
+            // Pencarian berdasarkan nama siswa
             if ($request->filled('search')) {
-                $query->whereHas('siswa', function ($q) use ($request) {
-                    $q->where('nama', 'like', '%' . $request->search . '%');
+                $search = $request->input('search');
+                $query->whereHas('siswa', function ($q) use ($search) {
+                    $q->where('nama', 'like', '%' . $search . '%');
                 });
             }
 
+            // Filter berdasarkan bulan/tahun
             if ($request->filled('date')) {
-                $date = Carbon::parse($request->date);
+                $date = Carbon::parse($request->input('date'));
                 $query->whereMonth('created_at', $date->month)
                     ->whereYear('created_at', $date->year);
             }
 
-            $iqras = $query->with('siswa', 'pengajar')->paginate(10);
+            $iqras = $query->paginate(10)->appends($request->all());
         }
 
         return view('iqra.index', compact('iqras'));

@@ -14,17 +14,17 @@
                         @method('patch')
                         <div class="mb-4">
                             <x-input-label for="name" :value="__('Nama')" />
-                            <x-text-input id="name" class="block w-full mt-1" type="text" name="name" :value="old('name', $pengajar->name)" required autofocus autocomplete="name" />
+                            <x-text-input id="name" class="block w-full mt-1" type="text" name="name" :value="old('name', $pengajar->name)" required autofocus />
                             <x-input-error :messages="$errors->get('name')" class="mt-2" />
                         </div>
                         <div class="mb-4">
                             <x-input-label for="phone_number" :value="__('No Telpon')" />
-                            <x-text-input id="phone_number" class="block w-full mt-1" type="text" name="phone_number" :value="old('phone_number', $pengajar->phone_number)" required autofocus autocomplete="phone_number" />
+                            <x-text-input id="phone_number" class="block w-full mt-1" type="text" name="phone_number" :value="old('phone_number', $pengajar->phone_number)" required />
                             <x-input-error :messages="$errors->get('phone_number')" class="mt-2" />
                         </div>
                         <div class="mb-4">
                             <x-input-label for="email" :value="__('Email')" />
-                            <x-text-input id="email" class="block w-full mt-1" type="email" name="email" :value="old('email', $pengajar->email)" required autocomplete="email" />
+                            <x-text-input id="email" class="block w-full mt-1" type="email" name="email" :value="old('email', $pengajar->email)" required />
                             <x-input-error :messages="$errors->get('email')" class="mt-2" />
                         </div>
                         <div class="mb-4">
@@ -32,8 +32,7 @@
 
                             <x-text-input id="password" class="block w-full mt-1"
                                             type="password"
-                                            name="password"
-                                            autocomplete="new-password" />
+                                            name="password" />
 
                             <x-input-error :messages="$errors->get('password')" class="mt-2" />
                         </div>
@@ -42,7 +41,7 @@
 
                             <x-text-input id="password_confirmation" class="block w-full mt-1"
                                             type="password"
-                                            name="password_confirmation" autocomplete="new-password" />
+                                            name="password_confirmation" />
 
                             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                         </div>

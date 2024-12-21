@@ -85,6 +85,10 @@
                             @endforelse
                         </tbody>
                     </table>
+
+                    <div class="flex justify-center mt-4 mb-4">
+                        {{ $orangtuas->links() }}
+                    </div>
                 </div>
             </div>
         </div>
