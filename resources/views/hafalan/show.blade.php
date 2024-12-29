@@ -1,15 +1,20 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
-            {{ __('Detail Hafalan') }}
-        </h2>
+        <div class="flex items-center">
+            <a href="{{ route('hafalan.index') }}" class="mr-4 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+                <x-heroicon-o-arrow-left class="w-5 h-5" />
+            </a>
+            <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
+                {{ __('Detail Hafalan') }}
+            </h2>
+        </div>
     </x-slot>
 
     <div class="py-12">
-        <div class="mx-auto max-w-4xl sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
             <div class="overflow-hidden bg-white shadow-md dark:bg-gray-800 sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <div class="mb-4 text-xl font-semibold text-center border-b border-gray-300 dark:border-gray-700 pb-2">
+                    <div class="pb-2 mb-4 text-xl font-semibold text-center border-b border-gray-300 dark:border-gray-700">
                         Detail Hafalan
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8">
@@ -37,11 +42,11 @@
                             <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Nilai</p>
                             <p class="text-base font-semibold text-gray-900 dark:text-gray-200">{{ $hafalan->nilai }}</p>
                         </div>
-                        <div class="col-span-1 md:col-span-2">
+                        <div>
                             <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Catatan</p>
                             <p class="text-base font-semibold text-gray-900 dark:text-gray-200">{{ $hafalan->catatan }}</p>
                         </div>
-                        <div class="col-span-1 md:col-span-2">
+                        <div>
                             <p class="text-sm font-medium text-gray-600 dark:text-gray-400">Pengajar</p>
                             <p class="text-base font-semibold text-gray-900 dark:text-gray-200">{{ $hafalan->pengajar->name }}</p>
                         </div>

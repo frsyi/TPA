@@ -15,7 +15,7 @@
 
                         <div class="mb-6">
                             <x-input-label for="siswa_id" :value="__('Nama Siswa')" />
-                            <x-select id="siswa_id" name="siswa_id" class="block w-full mt-1" autofocus required>
+                            <x-select id="siswa_id" name="siswa_id" class="block w-full mt-1 select2 " autofocus required>
                                 <option value="">Cari Nama Siswa</option>
                                 @foreach ($siswas as $siswa)
                                     <option value="{{ $siswa->id }}">{{ $siswa->nama }}</option>
@@ -90,7 +90,7 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
         $(document).ready(function () {
-            $('#siswa_id').select2();
+            // $('#siswa_id').select2();
 
             $('#juz_id').change(function () {
                 let juzId = $(this).val();

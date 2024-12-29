@@ -1,8 +1,13 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
-            {{ __('Tambah Siswa') }}
-        </h2>
+        <div class="flex items-center">
+            <a href="{{ route('siswa.index') }}" class="mr-4 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+                <x-heroicon-o-arrow-left class="w-5 h-5" />
+            </a>
+            <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
+                {{ __('Tambah Siswa') }}
+            </h2>
+        </div>
     </x-slot>
 
     <div class="py-12">
