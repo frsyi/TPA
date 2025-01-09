@@ -1,61 +1,181 @@
-<div class="flex h-screen" x-data="{ open: false }">
-    <!-- Sidebar -->
-    <div :class="{ 'translate-x-0': open, '-translate-x-full': !open }"
-        class="fixed inset-y-0 left-0 z-30 w-64 transition-transform duration-300 ease-in-out transform bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-        <div class="flex items-center justify-between px-4 py-4">
-            <!-- Logo -->
-            <a href="{{ route('dashboard') }}">
-                <svg xmlns="http://www.w3.org/2000/svg" height="50" width="50" viewBox="0 0 640 512">
-                    <path fill="#88C273"
-                        d="M400 0c5 0 9.8 2.4 12.8 6.4c34.7 46.3 78.1 74.9 133.5 111.5c0 0 0 0 0 0s0 0 0 0c5.2 3.4 10.5 7 16 10.6c28.9 19.2 45.7 51.7 45.7 86.1c0 28.6-11.3 54.5-29.8 73.4l-356.4 0c-18.4-19-29.8-44.9-29.8-73.4c0-34.4 16.7-66.9 45.7-86.1c5.4-3.6 10.8-7.1 16-10.6c0 0 0 0 0 0s0 0 0 0C309.1 81.3 352.5 52.7 387.2 6.4c3-4 7.8-6.4 12.8-6.4zM288 512l0-72c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 72-48 0c-17.7 0-32-14.3-32-32l0-128c0-17.7 14.3-32 32-32l416 0c17.7 0 32 14.3 32 32l0 128c0 17.7-14.3 32-32 32l-48 0 0-72c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 72-64 0 0-58c0-19-8.4-37-23-49.2L400 384l-25 20.8C360.4 417 352 435 352 454l0 58-64 0zM70.4 5.2c5.7-4.3 13.5-4.3 19.2 0l16 12C139.8 42.9 160 83.2 160 126l0 2L0 128l0-2C0 83.2 20.2 42.9 54.4 17.2l16-12zM0 160l160 0 0 136.6c-19.1 11.1-32 31.7-32 55.4l0 128c0 9.6 2.1 18.6 5.8 26.8c-6.6 3.4-14 5.2-21.8 5.2l-64 0c-26.5 0-48-21.5-48-48L0 176l0-16z" />
-                </svg>
+<div :class="{'translate-x-0': sidebarOpen, '-translate-x-full': !sidebarOpen}" class="fixed inset-y-0 z-30 flex-shrink-0 w-64 transition-transform duration-200 ease-in-out transform bg-white border-r dark:bg-gray-900 dark:border-gray-700 lg:translate-x-0">
+    <nav class="flex flex-col h-full px-4 py-6 space-y-4 bg-light-background">
+        <!-- Logo -->
+        <div class="flex items-center justify-center h-16 bg-light-background dark:bg-gray-900">
+            <a href="{{ route('dashboard') }}" class="text-lg font-bold text-white">
+                <x-application-logo class="w-20 h-20 text-gray-500 fill-current" />
             </a>
-
-            <!-- Close Sidebar Button -->
-            <button @click="open = false" class="text-gray-500 hover:text-gray-900 dark:hover:text-gray-300 focus:outline-none">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
-            </button>
         </div>
 
-        <!-- Sidebar Links -->
-        <nav class="mt-4">
-            <ul class="space-y-2">
-                <li>
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
-                </li>
-                <li>
-                    <x-nav-link :href="route('hafalan.index')" :active="request()->routeIs('hafalan.index')">
-                        {{ __('Hafalan') }}
-                    </x-nav-link>
-                </li>
-                <li>
-                    <x-nav-link :href="route('iqra.index')" :active="request()->routeIs('iqra.index')">
-                        {{ __('Iqra') }}
-                    </x-nav-link>
-                </li>
-                <!-- Tambahkan link lainnya sesuai kebutuhan -->
-            </ul>
-        </nav>
-    </div>
+        <!-- Navigation -->
+        <!-- Navigation -->
+        @canany(['admin', 'orangtua'])
+            <x-nav-link :href="route('hafalan.index')" :active="request()->routeIs('hafalan.index')">
+                <div class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c.28 0 .56.04.82.11m-.82 3.39c-3.31 0-6 2.69-6 6v1h12v-1c0-3.31-2.69-6-6-6zm0-4a4 4 0 110 8 4 4 0 010-8z" />
+                    </svg>
+                    {{ __('Hafalan') }}
+                </div>
+            </x-nav-link>
+            <x-nav-link :href="route('iqra.index')" :active="request()->routeIs('iqra.index')">
+                <div class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c.28 0 .56.04.82.11m-.82 3.39c-3.31 0-6 2.69-6 6v1h12v-1c0-3.31-2.69-6-6-6zm0-4a4 4 0 110 8 4 4 0 010-8z" />
+                    </svg>
+                    {{ __('Iqra') }}
+                </div>
+            </x-nav-link>
+        @endcanany
 
-    <!-- Main Content -->
-    <div class="flex-1">
-        <header class="bg-white dark:bg-gray-800">
-            <button @click="open = true" class="p-2 text-gray-500 dark:text-gray-300">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                </svg>
-            </button>
-        </header>
+        @can('admin')
+            <x-nav-link :href="route('siswa.index')" :active="request()->routeIs('siswa.*')">
+                <div class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                    {{ __('Siswa') }}
+                </div>
+            </x-nav-link>
+            <x-nav-link :href="route('orangtua.index')" :active="request()->routeIs('orangtua.index')">
+                <div class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h6a1 1 0 011 1v1h6a1 1 0 011 1v3a1 1 0 01-1 1h-1v5a1 1 0 01-1 1h-5a1 1 0 01-1-1v-5H4a1 1 0 01-1-1V5a1 1 0 011-1z" />
+                    </svg>
+                    {{ __('Orangtua') }}
+                </div>
+            </x-nav-link>
+        @endcan
 
-        <main class="p-4">
-            <!-- Konten utama Anda -->
-            <h1 class="text-2xl">Selamat Datang di Dashboard</h1>
-        </main>
-    </div>
+        @can('pengurus')
+            <x-nav-link :href="route('pengajar.index')" :active="request()->routeIs('pengajar.*')">
+                <div class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16l-4-4m0 0l4-4m-4 4h12" />
+                    </svg>
+                    {{ __('Pengajar') }}
+                </div>
+            </x-nav-link>
+            <x-nav-link :href="route('activity-logs.index')" :active="request()->routeIs('activity-logs.index')">
+                <div class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m-6-8h6" />
+                    </svg>
+                    {{ __('Aktivitas Pengajar') }}
+                </div>
+            </x-nav-link>
+        @endcan
+    </nav>
 </div>
+
+<!-- Overlay for Mobile -->
+<div x-show="sidebarOpen"
+     @click="sidebarOpen = false"
+     class="fixed inset-0 z-20 bg-black bg-opacity-50 lg:hidden">
+</div>
+
+
+
+
+
+{{-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Sidebar</title>
+  <script src="https://cdn.jsdelivr.net/npm/tw-elements"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Tambahan agar scrollbar rapi */
+    .scrollbar-custom::-webkit-scrollbar {
+      width: 4px;
+    }
+    .scrollbar-custom::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    .scrollbar-custom::-webkit-scrollbar-thumb {
+      background: #888;
+    }
+    .scrollbar-custom::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+  </style>
+</head>
+<body class="bg-gray-100">
+
+  <!-- Navbar -->
+  <div class="fixed top-0 left-0 z-50 w-full bg-white shadow-md dark:bg-gray-800">
+    <div class="flex items-center justify-between p-4">
+      <!-- Hamburger Button -->
+      <button id="sidebarToggle" class="text-gray-700 dark:text-white lg:hidden focus:outline-none focus:ring-2 focus:ring-gray-300">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+        </svg>
+      </button>
+      <a href="#" class="text-xl font-bold text-gray-800 dark:text-white">Brand</a>
+    </div>
+  </div>
+  <!-- End Navbar -->
+
+  <!-- Sidebar -->
+    <div id="sidebar" class="fixed top-0 left-0 z-40 w-64 h-full overflow-y-auto transition-transform duration-300 -translate-x-full bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700 lg:translate-x-0 lg:block scrollbar-custom">
+        <div class="p-6">
+            <a href="#" class="block mb-6 text-xl font-bold text-gray-800 dark:text-white">Brand</a>
+            <nav>
+                <ul class="space-y-2">
+                    <!-- Dashboard -->
+                    <li>
+                        <a href="{{ route('dashboard') }}" class="flex items-center gap-3 p-2 text-gray-800 rounded-lg hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                        Dashboard
+                        </a>
+                    </li>
+                    <!-- Hafalan -->
+                    <li>
+                        <a href="{{ route('hafalan.index') }}" class="flex items-center gap-3 p-2 text-gray-800 rounded-lg hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="15" r="3"/><circle cx="9" cy="7" r="4"/><path d="M10 15H6a4 4 0 0 0-4 4v2"/><path d="m21.7 16.4-.9-.3"/><path d="m15.2 13.9-.9-.3"/></svg>
+                        Hafalan
+                        </a>
+                    </li>
+                    <!-- Iqra -->
+                    <li>
+                        <a href="{{ route('iqra.index') }}" class="flex items-center gap-3 p-2 text-gray-800 rounded-lg hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="15" r="3"/><circle cx="9" cy="7" r="4"/><path d="M10 15H6a4 4 0 0 0-4 4v2"/><path d="m21.7 16.4-.9-.3"/><path d="m15.2 13.9-.9-.3"/></svg>
+                        Iqra
+                        </a>
+                    </li>
+                    <!-- Siswa -->
+                    <li>
+                        <a href="{{ route('siswa.index') }}" class="flex items-center gap-3 p-2 text-gray-800 rounded-lg hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
+                        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 2H8.6c-.4 0-.8.2-1.1.5-.3.3-.5.7-.5 1.1v12.8c0 .4.2.8.5 1.1.3.3.7.5 1.1.5h9.8c.4 0 .8-.2 1.1-.5.3-.3.5-.7.5-1.1V6.5L15.5 2z"/><path d="M3 7.6v12.8c0 .4.2.8.5 1.1.3.3.7.5 1.1.5h9.8"/></svg>
+                        Siswa
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+  <!-- End Sidebar -->
+
+  <!-- Overlay -->
+  <div id="overlay" class="fixed inset-0 z-30 hidden bg-black bg-opacity-50"></div>
+
+  <script>
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+    const toggleButton = document.getElementById('sidebarToggle');
+
+    toggleButton.addEventListener('click', () => {
+      sidebar.classList.toggle('-translate-x-full');
+      overlay.classList.toggle('hidden');
+    });
+
+    overlay.addEventListener('click', () => {
+      sidebar.classList.add('-translate-x-full');
+      overlay.classList.add('hidden');
+    });
+  </script>
+
+</body>
+</html> --}}

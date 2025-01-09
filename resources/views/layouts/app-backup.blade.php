@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+
+        <title>TPA Masjid Al-Mubarok</title>
+
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.bunny.net">
+        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+
+        <!-- Scripts -->
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+    </head>
+    <body class="font-sans antialiased">
+        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+            @include('layouts.sidebar')
+
+            <!-- Page Heading -->
+            @if (isset($header))
+                <header class="px-4 bg-white shadow dark:bg-gray-800 sm:px-6 md:px-8 lg:pl-72">
+                    <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
+                        {{ $header }}
+                    </div>
+                </header>
+            @endif
+
+            <!-- Page Content -->
+            <main class="lg:pl-72">
+                {{ $slot }}
+            </main>
+        </div>
+    </body>
+</html>
+
+
+
+{{-- <!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>{{ config('app.name', 'Laravel') }}</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+    <!-- Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs" defer></script>
+</head>
+<body class="font-sans antialiased">
+    <div class="flex">
+        @include('layouts.navigation')
+
+        <div class="flex-1 min-h-screen bg-gray-100 dark:bg-gray-900">
+            <!-- Page Heading -->
+            @if (isset($header))
+                <header class="bg-white shadow dark:bg-gray-800">
+                    <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
+                        {{ $header }}
+                    </div>
+                </header>
+            @endif
+
+            <!-- Page Content -->
+            <main>
+                {{ $slot }}
+            </main>
+        </div>
+    </div>
+
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- SweetAlert2 Notification Script -->
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                title: 'Success!',
+                text: '{{ session('success') }}',
+                icon: 'success',
+                confirmButtonText: 'OK'
+            });
+        </script>
+    @endif
+</body>
+</html> --}}

@@ -1,13 +1,8 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex items-center">
-            <a href="{{ route('orangtua.index') }}" class="mr-4 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
-                <x-heroicon-o-arrow-left class="w-5 h-5" />
-            </a>
-            <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
+        <h2 class="text-xl font-semibold leading-tight text-white dark:text-gray-200">
                 {{ __('Detail Orangtua') }}
-            </h2>
-        </div>
+        </h2>
     </x-slot>
 
     <!-- Detail Siswa -->
