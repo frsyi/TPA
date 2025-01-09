@@ -15,7 +15,7 @@
     <script src="https://cdn.jsdelivr.net/npm/alpinejs" defer></script>
 </head>
 <body class="font-sans antialiased">
-    <div x-data="{ sidebarOpen: false }" class="flex min-h-screen bg-gray-100 dark:bg-gray-900">
+    <div x-data="{ sidebarOpen: false }" class="min-h-screen bg-gray-100 dark:bg-gray-900">
         <!-- Sidebar -->
         @include('layouts.sidebar')
 

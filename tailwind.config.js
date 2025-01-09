@@ -21,7 +21,6 @@ export default {
                     primary: '#1a73e8',
                     secondary: '#f5f5f5',
                     text: '#333333',
-                    active: '#00738a',
                 },
             },
         },
