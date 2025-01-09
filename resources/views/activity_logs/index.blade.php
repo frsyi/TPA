@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="text-xl font-semibold leading-tight text-gray-800 dark:text-gray-200">
+        <h2 class="text-xl font-semibold leading-tight text-white dark:text-gray-200">
             {{ __('Presensi Pengajar - ' . $monthName) }}
         </h2>
     </x-slot>
@@ -19,7 +19,7 @@
                                 <input type="month" name="date" value="{{ $date }}" class="w-full px-4 py-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200">
                             </div>
                             <div>
-                                <button type="submit" class="w-full px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700">Search</button>
+                                <button type="submit" class="w-full px-4 py-2 text-white bg-gray-800 rounded-lg dark:bg-blue-600 hover:bg-gray-700 dark: darkhover:bg-blue-700">Search</button>
                             </div>
                         </div>
                     </form>

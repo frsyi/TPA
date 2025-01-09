@@ -1,5 +1,5 @@
 <div :class="{'translate-x-0': sidebarOpen, '-translate-x-full': !sidebarOpen}" class="fixed inset-y-0 z-30 flex-shrink-0 w-64 transition-transform duration-200 ease-in-out transform bg-white border-r dark:bg-gray-900 dark:border-gray-700 lg:translate-x-0">
-    <nav class="flex flex-col h-full px-4 py-6 space-y-4 bg-light-background">
+    <nav class="flex flex-col h-full px-4 py-6 bg-light-background dark:bg-gray-900">
         <!-- Logo -->
         <div class="flex items-center justify-center h-16 bg-light-background dark:bg-gray-900">
             <a href="{{ route('dashboard') }}" class="text-lg font-bold text-white">
@@ -8,63 +8,61 @@
         </div>
 
         <!-- Navigation -->
-        <!-- Navigation -->
-        @canany(['admin', 'orangtua'])
-            <x-nav-link :href="route('hafalan.index')" :active="request()->routeIs('hafalan.index')">
-                <div class="flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c.28 0 .56.04.82.11m-.82 3.39c-3.31 0-6 2.69-6 6v1h12v-1c0-3.31-2.69-6-6-6zm0-4a4 4 0 110 8 4 4 0 010-8z" />
-                    </svg>
-                    {{ __('Hafalan') }}
-                </div>
-            </x-nav-link>
-            <x-nav-link :href="route('iqra.index')" :active="request()->routeIs('iqra.index')">
-                <div class="flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c.28 0 .56.04.82.11m-.82 3.39c-3.31 0-6 2.69-6 6v1h12v-1c0-3.31-2.69-6-6-6zm0-4a4 4 0 110 8 4 4 0 010-8z" />
-                    </svg>
-                    {{ __('Iqra') }}
-                </div>
-            </x-nav-link>
-        @endcanany
+        <div class="flex-1 space-y-4">
+            @canany(['admin', 'orangtua'])
+                <x-nav-link :href="route('hafalan.index')" :active="request()->routeIs('hafalan.index')">
+                    <div class="flex items-center">
+                        <x-heroicon-o-book-open class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"/>
+                        {{ __('Hafalan') }}
+                    </div>
+                </x-nav-link>
+                <x-nav-link :href="route('iqra.index')" :active="request()->routeIs('iqra.index')">
+                    <div class="flex items-center">
+                        <x-heroicon-o-bookmark-square class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"/>
+                        {{ __('Iqra') }}
+                    </div>
+                </x-nav-link>
+            @endcanany
 
-        @can('admin')
-            <x-nav-link :href="route('siswa.index')" :active="request()->routeIs('siswa.*')">
-                <div class="flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-                    </svg>
-                    {{ __('Siswa') }}
-                </div>
-            </x-nav-link>
-            <x-nav-link :href="route('orangtua.index')" :active="request()->routeIs('orangtua.index')">
-                <div class="flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h6a1 1 0 011 1v1h6a1 1 0 011 1v3a1 1 0 01-1 1h-1v5a1 1 0 01-1 1h-5a1 1 0 01-1-1v-5H4a1 1 0 01-1-1V5a1 1 0 011-1z" />
-                    </svg>
-                    {{ __('Orangtua') }}
-                </div>
-            </x-nav-link>
-        @endcan
+            @can('admin')
+                <x-nav-link :href="route('siswa.index')" :active="request()->routeIs('siswa.*')">
+                    <div class="flex items-center">
+                        <x-heroicon-o-academic-cap class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"/>
+                        {{ __('Siswa') }}
+                    </div>
+                </x-nav-link>
+                <x-nav-link :href="route('orangtua.index')" :active="request()->routeIs('orangtua.index')">
+                    <div class="flex items-center">
+                        <x-heroicon-o-identification class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"/>
+                        {{ __('Orangtua') }}
+                    </div>
+                </x-nav-link>
+            @endcan
 
-        @can('pengurus')
-            <x-nav-link :href="route('pengajar.index')" :active="request()->routeIs('pengajar.*')">
-                <div class="flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16l-4-4m0 0l4-4m-4 4h12" />
-                    </svg>
-                    {{ __('Pengajar') }}
-                </div>
-            </x-nav-link>
-            <x-nav-link :href="route('activity-logs.index')" :active="request()->routeIs('activity-logs.index')">
-                <div class="flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m-6-8h6" />
-                    </svg>
-                    {{ __('Aktivitas Pengajar') }}
-                </div>
-            </x-nav-link>
-        @endcan
+            @can('pengurus')
+                <x-nav-link :href="route('pengajar.index')" :active="request()->routeIs('pengajar.*')">
+                    <div class="flex items-center">
+                        <x-heroicon-o-user-group class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"/>
+                        {{ __('Pengajar') }}
+                    </div>
+                </x-nav-link>
+                <x-nav-link :href="route('activity-logs.index')" :active="request()->routeIs('activity-logs.index')">
+                    <div class="flex items-center">
+                        <x-heroicon-o-clipboard-document-check class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"/>
+                        {{ __('Aktivitas Pengajar') }}
+                    </div>
+                </x-nav-link>
+            @endcan
+        </div>
+
+        <!-- Theme Toggle Switch - Dipastikan di paling bawah -->
+        <div class="flex justify-center p-4 mt-auto">
+            <button
+                @click="darkMode = !darkMode"
+                class="px-4 py-2 text-white rounded-lg bg-light-background dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-300">
+                <span x-text="darkMode ? '🌙 Dark Mode' : '☀️ Light Mode'"></span>
+            </button>
+        </div>
     </nav>
 </div>
 
