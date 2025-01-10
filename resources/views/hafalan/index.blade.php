@@ -94,10 +94,10 @@
                                             <a href="{{ route('hafalan.edit', $hafalan->id) }}" class="text-yellow-600 dark:text-yellow-400">
                                                 <x-heroicon-o-pencil-square class="w-6 h-6"/>
                                             </a>
-                                            <form action="{{ route('hafalan.destroy', $hafalan->id) }}" method="POST" onsubmit="return confirm('Apakah anda yakin ingin menghapus data ini?');">
+                                            <form action="{{ route('hafalan.destroy', $hafalan->id) }}" method="POST" class="delete-form">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="text-red-600 dark:text-red-400">
+                                                <button type="button" class="flex items-center text-red-600 dark:text-red-400 delete-button">
                                                     <x-heroicon-o-trash class="w-6 h-6"/>
                                                 </button>
                                             </form>
@@ -122,4 +122,6 @@
             </div>
         </div>
     </div>
+
+
 </x-app-layout>
