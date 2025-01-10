@@ -32,6 +32,7 @@
                                 <th scope="col" class="px-6 py-3">Pengajar</th>
                                 <th scope="col" class="px-6 py-3">Jumlah Aktivitas</th>
                                 <th scope="col" class="px-6 py-3">Jumlah Kehadiran Per Bulan</th>
+                                <th scope="col" class="px-6 py-3">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -46,10 +47,16 @@
                                     <td class="px-6 py-4 font-medium text-gray-900 dark:text-white">
                                         {{ $log->total_days }} hari
                                     </td>
+                                    <td class="px-6 py-4 font-medium text-gray-900 dark:text-white">
+                                        <a href=""
+                                           class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-500">
+                                            <x-heroicon-o-magnifying-glass-circle class="w-6 h-6"/>
+                                        </a>
+                                    </td>
                                 </tr>
                             @empty
                                 <tr class="bg-white dark:bg-gray-800">
-                                    <td colspan="3" class="px-6 py-4 font-medium text-center text-gray-900 dark:text-white">
+                                    <td colspan="4" class="px-6 py-4 font-medium text-center text-gray-900 dark:text-white">
                                         Belum ada data log pengajar untuk bulan ini
                                     </td>
                                 </tr>
