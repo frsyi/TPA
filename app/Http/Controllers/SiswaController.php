@@ -44,10 +44,24 @@ class SiswaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Siswa $siswa)
+    public function show(Siswa $siswa, Request $request)
     {
-        $hafalans = $siswa->hafalans()->with('pengajar', 'juz', 'surat')->get();
-        return view('siswa.show', compact('siswa', 'hafalans'));
+        $bulan = $request->input('bulan');
+
+        $hafalans = $siswa->hafalans()
+            ->when($bulan, function ($query) use ($bulan) {
+                $query->whereMonth('created_at', $bulan);
+            })
+            ->with('pengajar', 'juz', 'surat')
+            ->paginate(10);
+
+        $iqras = $siswa->iqras()
+            ->when($bulan, function ($query) use ($bulan) {
+                $query->whereMonth('created_at', $bulan);
+            })
+            ->paginate(10);
+
+        return view('siswa.show', compact('siswa', 'hafalans', 'iqras', 'bulan'));
     }
 
     /**
