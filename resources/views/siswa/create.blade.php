@@ -28,7 +28,12 @@
                         </div>
                         <div class="mb-6">
                             <x-input-label for="kelas" :value="__('Kelas')" />
-                            <x-text-input id="kelas" name="kelas" type="text" class="block w-full mt-1" required />
+                            <x-select id="kelas" name="kelas" class="block w-full mt-1" required>
+                                <option value="" disabled selected>Pilih Kelas</option>
+                                <option value="TKA">TKA</option>
+                                <option value="TPA">TPA</option>
+                                <option value="TQA">TQA</option>
+                            </x-select>
                             <x-input-error class="mt-2" :messages="$errors->get('kelas')" />
                         </div>
                         <div class="flex items-center gap-4">

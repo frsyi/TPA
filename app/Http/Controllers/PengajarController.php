@@ -34,7 +34,7 @@ class PengajarController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'phone_number' => 'required|string|max:13',
+            'phone_number' => 'nullable|string|max:13',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
         ]);
@@ -78,7 +78,7 @@ class PengajarController extends Controller
 
         $request->validate([
             'name' => 'required|string|max:255',
-            'phone_number' => 'required|string|max:13',
+            'phone_number' => 'nullable|string|max:13',
             'email' => 'required|string|email|max:255|unique:users,email,' . $pengajar->id,
             'password' => 'nullable|string|min:8|confirmed',
         ]);

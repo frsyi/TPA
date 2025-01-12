@@ -35,7 +35,7 @@ class OrangtuaController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'phone_number' => 'required|string|max:13',
+            'phone_number' => 'nullable|string|max:13',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'siswa_id' => 'required|exists:siswas,id',
@@ -83,7 +83,7 @@ class OrangtuaController extends Controller
 
         $request->validate([
             'name' => 'required|string|max:255',
-            'phone_number' => 'required|string|max:13',
+            'phone_number' => 'nullable|string|max:13',
             'email' => 'required|string|email|max:255|unique:users,email,' . $orangtua->id,
             'password' => 'nullable|string|min:8|confirmed',
             'siswa_id' => 'required|exists:siswas,id',
@@ -103,13 +103,10 @@ class OrangtuaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy($id)
     {
-        if ($user->role === 'orangtua') {
-            $user->delete();
-
-            return redirect()->route('orangtua.index')
-                ->with('success', 'Data Orangtua berhasil dihapus!');
-        }
+        $user = User::where('role', 'orangtua')->findOrFail($id);
+        $user->delete();
+        return redirect()->route('orangtua.index')->with('success', 'Data Orangtua berhasil dihapus!');
     }
 }

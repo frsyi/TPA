@@ -57,7 +57,7 @@
 
                         <div class="mb-6">
                             <x-input-label for="catatan" :value="__('Catatan')" />
-                            <x-text-input id="catatan" name="catatan" type="text" class="block w-full mt-1" required />
+                            <x-text-input id="catatan" name="catatan" type="text" class="block w-full mt-1" />
                             <x-input-error class="mt-2" :messages="$errors->get('catatan')" />
                         </div>
 

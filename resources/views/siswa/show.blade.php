@@ -36,7 +36,7 @@
         <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="p-2 text-gray-900 dark:text-gray-100">
                 <form method="GET" action="{{ route('siswa.show', $siswa->id) }}" class="flex items-center mb-4 space-x-4">
-                    <select name="bulan" id="bulan" class="border-gray-300 rounded-md">
+                    <select name="bulan" id="bulan" class="border-gray-300 rounded-md\ dark:bg-gray-700 dark:text-gray-200">
                         <option value="">Semua Bulan</option>
                         @foreach (range(1, 12) as $month)
                             <option value="{{ $month }}" {{ $bulan == $month ? 'selected' : '' }}>
@@ -98,7 +98,7 @@
 
     <!-- Data Iqra -->
     <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <div class="p-6 text-gray-900 dark:text-gray-100">
+        <div class="mt-12 mb-6 text-gray-900 dark:text-gray-100">
             <div class="p-4 mb-6 text-2xl font-bold rounded-lg bg-gray-50 dark:bg-gray-700">Data Iqra</div>
             <div class="relative overflow-x-auto">
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">

@@ -28,7 +28,12 @@
                         </div>
                         <div class="mb-6">
                             <x-input-label for="kelas" :value="__('Kelas')" />
-                            <x-text-input id="kelas" name="kelas" type="text" class="block w-full mt-1" :value="old('kelas', $siswa->kelas)" required />
+                            <x-select id="kelas" name="kelas" class="block w-full mt-1" required>
+                                <option value="" disabled {{ old('kelas', $siswa->kelas) == '' ? 'selected' : '' }}>Pilih Kelas</option>
+                                <option value="TKA" {{ old('kelas', $siswa->kelas) == 'TKA' ? 'selected' : '' }}>TKA</option>
+                                <option value="TPA" {{ old('kelas', $siswa->kelas) == 'TPA' ? 'selected' : '' }}>TPA</option>
+                                <option value="TQA" {{ old('kelas', $siswa->kelas) == 'TQA' ? 'selected' : '' }}>TQA</option>
+                            </x-select>
                             <x-input-error class="mt-2" :messages="$errors->get('kelas')" />
                         </div>
                         <div class="flex items-center gap-4">

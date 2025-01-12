@@ -19,7 +19,7 @@
                         </div>
                         <div class="mb-4">
                             <x-input-label for="phone_number" :value="__('No Telpon')" />
-                            <x-text-input id="phone_number" class="block w-full mt-1" type="text" name="phone_number" required />
+                            <x-text-input id="phone_number" class="block w-full mt-1" type="text" name="phone_number" />
                             <x-input-error :messages="$errors->get('phone_number')" class="mt-2" />
                             </div>
                         <div class="mb-4">

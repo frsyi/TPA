@@ -48,7 +48,7 @@
                                         {{ $log->total_days }} hari
                                     </td>
                                     <td class="px-6 py-4 font-medium text-gray-900 dark:text-white">
-                                        <a href=""
+                                        <a href="{{ route('activity-logs.show', $log->pengajar_id) }}"
                                            class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-500">
                                             <x-heroicon-o-magnifying-glass-circle class="w-6 h-6"/>
                                         </a>

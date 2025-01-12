@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('surat_id')->constrained('surats');
             $table->foreignId('pengajar_id')->constrained('users');
             $table->integer('mulai_ayat');
-            $table->integer('akhir_ayat');
+            $table->integer('akhir_ayat')->nullable();
             $table->string('nilai');
             $table->text('catatan')->nullable();
             $table->timestamps();

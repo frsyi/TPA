@@ -26,7 +26,7 @@
                                 <td class="px-6 py-4 text-lg text-gray-900 whitespace-nowrap dark:text-gray-200">{{ $orangtua->email }}</td>
                             </tr>
                             <tr class="dark:border-gray-700">
-                                <td class="px-6 py-4 text-lg font-bold text-gray-900 whitespace-nowrap dark:text-gray-200">No Telepon</td>
+                                <td class="px-6 py-4 text-lg font-bold text-gray-900 whitespace-nowrap dark:text-gray-200">No Telpon</td>
                                 <td class="px-6 py-4 text-lg text-gray-900 whitespace-nowrap dark:text-gray-200">{{ $orangtua->phone_number }}</td>
                             </tr>
                         </tbody>

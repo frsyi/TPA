@@ -53,7 +53,7 @@
 
                         <div class="mb-6">
                             <x-input-label for="akhir_ayat" :value="__('Sampai Ayat')" />
-                            <x-select id="akhir_ayat" name="akhir_ayat" class="block w-full mt-1" required>
+                            <x-select id="akhir_ayat" name="akhir_ayat" class="block w-full mt-1">
                                 <option value="" disabled selected>Pilih Ayat</option>
                             </x-select>
                             <x-input-error class="mt-2" :messages="$errors->get('akhir_ayat')" />
@@ -72,7 +72,7 @@
 
                         <div class="mb-6">
                             <x-input-label for="catatan" :value="__('Catatan')" />
-                            <x-text-input id="catatan" name="catatan" type="text" class="block w-full mt-1" required/>
+                            <x-text-input id="catatan" name="catatan" type="text" class="block w-full mt-1"/>
                             <x-input-error class="mt-2" :messages="$errors->get('catatan')" />
                         </div>
 
