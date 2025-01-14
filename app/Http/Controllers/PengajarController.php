@@ -100,13 +100,10 @@ class PengajarController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user)
+    public function destroy($id)
     {
-        if ($user->role === 'pengajar') {
-            $user->delete();
-
-            return redirect()->route('pengajar.index')
-                ->with('success', 'Data Pengajar berhasil dihapus!');
-        }
+        $user = User::where('role', 'pengajar')->findOrFail($id);
+        $user->delete();
+        return redirect()->route('pengajar.index')->with('success', 'Data Pengajar berhasil dihapus!');
     }
 }
