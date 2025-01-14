@@ -39,6 +39,9 @@ class OrangtuaController extends Controller
             'username' => 'required|string|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'siswa_id' => 'required|exists:siswas,id',
+        ], [
+            'username.unique' => 'Username telah digunakan.',
+            'password.confirmed' => 'Konfirmasi password tidak sama dengan password yang dimasukkan.',
         ]);
 
         User::create([
@@ -84,9 +87,12 @@ class OrangtuaController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'phone_number' => 'nullable|string|max:13',
-            'username' => 'required|string|max:255|unique:users,' . $orangtua->id,
+            'username' => 'required|string|max:255|unique:users,username,' . $orangtua->id,
             'password' => 'nullable|string|min:8|confirmed',
             'siswa_id' => 'required|exists:siswas,id',
+        ], [
+            'username.unique' => 'Username telah digunakan.',
+            'password.confirmed' => 'Konfirmasi password tidak sama dengan password yang dimasukkan.',
         ]);
 
         $orangtua->update([

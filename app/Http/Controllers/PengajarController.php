@@ -37,6 +37,9 @@ class PengajarController extends Controller
             'phone_number' => 'nullable|string|max:13',
             'username' => 'required|string|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
+        ], [
+            'username.unique' => 'Username telah digunakan.',
+            'password.confirmed' => 'Konfirmasi password tidak sama dengan password yang dimasukkan.',
         ]);
 
         User::create([
@@ -79,7 +82,7 @@ class PengajarController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'phone_number' => 'nullable|string|max:13',
-            'username' => 'required|string|max:255|unique:users,' . $pengajar->id,
+            'username' => 'required|string|max:255|unique:users,username,' . $pengajar->id,
             'password' => 'nullable|string|min:8|confirmed',
         ]);
 
