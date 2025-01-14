@@ -35,9 +35,9 @@
                             <x-input-error :messages="$errors->get('siswa_id')" class="mt-2" />
                         </div>
                         <div class="mb-4">
-                            <x-input-label for="email" :value="__('Email')" />
-                            <x-text-input id="email" class="block w-full mt-1" type="email" name="email" :value="old('email', $orangtua->email)" required />
-                            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                            <x-input-label for="username" :value="__('Username')" />
+                            <x-text-input id="username" class="block w-full mt-1" type="text" name="username" :value="old('username', $orangtua->username)" required />
+                            <x-input-error :messages="$errors->get('username')" class="mt-2" />
                         </div>
                         <div class="mb-4">
                             <x-input-label for="password" :value="__('Password (Biarkan kosong jika tidak ingin mengubah)')" />

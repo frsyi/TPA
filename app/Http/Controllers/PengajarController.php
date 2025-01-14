@@ -35,14 +35,14 @@ class PengajarController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'phone_number' => 'nullable|string|max:13',
-            'email' => 'required|string|email|max:255|unique:users',
+            'username' => 'required|string|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
         User::create([
             'name' => $request->name,
             'phone_number' => $request->phone_number,
-            'email' => $request->email,
+            'username' => $request->username,
             'password' => Hash::make($request->password),
             'role' => User::ROLE_PENGAJAR,
         ]);
@@ -79,14 +79,14 @@ class PengajarController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'phone_number' => 'nullable|string|max:13',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $pengajar->id,
+            'username' => 'required|string|max:255|unique:users,' . $pengajar->id,
             'password' => 'nullable|string|min:8|confirmed',
         ]);
 
         $pengajar->update([
             'name' => $request->name,
             'phone_number' => $request->phone_number,
-            'email' => $request->email,
+            'username' => $request->username,
             'password' => $request->password ? Hash::make($request->password) : $pengajar->password,
             'role' => User::ROLE_PENGAJAR,
         ]);

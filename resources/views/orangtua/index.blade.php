@@ -39,7 +39,7 @@
                                     No Telpon
                                 </th>
                                 <th scope="col" class="px-6 py-3">
-                                    Email
+                                    Username
                                 </th>
                                 <th scope="col" class="px-6 py-3">
                                     Action
@@ -56,7 +56,7 @@
                                         <p>{{ $orangtua->phone_number }}</p>
                                     </td>
                                     <td class="px-6 py-4 font-medium text-gray-900 dark:text-white">
-                                        <p>{{ $orangtua->email }}</p>
+                                        <p>{{ $orangtua->username }}</p>
                                     </td>
                                     <td class="px-6 py-4">
                                         <div class="flex space-x-3">

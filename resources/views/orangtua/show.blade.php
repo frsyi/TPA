@@ -22,8 +22,8 @@
                                 <td class="px-6 py-4 text-lg text-gray-900 whitespace-nowrap dark:text-gray-200">{{ $orangtua->siswa->nama }}</td>
                             </tr>
                             <tr class="dark:border-gray-700">
-                                <td class="px-6 py-4 text-lg font-bold text-gray-900 whitespace-nowrap dark:text-gray-200">Email</td>
-                                <td class="px-6 py-4 text-lg text-gray-900 whitespace-nowrap dark:text-gray-200">{{ $orangtua->email }}</td>
+                                <td class="px-6 py-4 text-lg font-bold text-gray-900 whitespace-nowrap dark:text-gray-200">Username</td>
+                                <td class="px-6 py-4 text-lg text-gray-900 whitespace-nowrap dark:text-gray-200">{{ $orangtua->username }}</td>
                             </tr>
                             <tr class="dark:border-gray-700">
                                 <td class="px-6 py-4 text-lg font-bold text-gray-900 whitespace-nowrap dark:text-gray-200">No Telpon</td>

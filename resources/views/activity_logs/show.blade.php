@@ -10,7 +10,7 @@
             <div class="overflow-hidden bg-white dark:bg-gray-800 sm:shadow-sm sm:rounded-lg">
                 <div class="p-6 dark:text-white">
                     <p class="text-lg"><strong>Nama:</strong> {{ $pengajar->name }}</p>
-                    <p class="text-lg"><strong>Email:</strong> {{ $pengajar->email }}</p>
+                    <p class="text-lg"><strong>Username:</strong> {{ $pengajar->username }}</p>
                 </div>
 
                 <div class="relative overflow-x-auto">

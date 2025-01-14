@@ -36,7 +36,7 @@ class OrangtuaController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'phone_number' => 'nullable|string|max:13',
-            'email' => 'required|string|email|max:255|unique:users',
+            'username' => 'required|string|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'siswa_id' => 'required|exists:siswas,id',
         ]);
@@ -44,7 +44,7 @@ class OrangtuaController extends Controller
         User::create([
             'name' => $request->name,
             'phone_number' => $request->phone_number,
-            'email' => $request->email,
+            'username' => $request->username,
             'password' => Hash::make($request->password),
             'role' => User::ROLE_ORANGTUA,
             'siswa_id' => $request->siswa_id,
@@ -84,7 +84,7 @@ class OrangtuaController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'phone_number' => 'nullable|string|max:13',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $orangtua->id,
+            'username' => 'required|string|max:255|unique:users,' . $orangtua->id,
             'password' => 'nullable|string|min:8|confirmed',
             'siswa_id' => 'required|exists:siswas,id',
         ]);
@@ -92,7 +92,7 @@ class OrangtuaController extends Controller
         $orangtua->update([
             'name' => $request->name,
             'phone_number' => $request->phone_number,
-            'email' => $request->email,
+            'username' => $request->username,
             'siswa_id' => $request->siswa_id,
             'password' => $request->password ? Hash::make($request->password) : $orangtua->password,
         ]);

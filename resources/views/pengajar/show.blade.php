@@ -18,8 +18,8 @@
                                 <td class="px-6 py-4 text-lg text-gray-900 whitespace-nowrap dark:text-gray-200">{{ $pengajar->name }}</td>
                             </tr>
                             <tr class="dark:border-gray-700">
-                                <td class="px-6 py-4 text-lg font-bold text-gray-900 whitespace-nowrap dark:text-gray-200">Email</td>
-                                <td class="px-6 py-4 text-lg text-gray-900 whitespace-nowrap dark:text-gray-200">{{ $pengajar->email }}</td>
+                                <td class="px-6 py-4 text-lg font-bold text-gray-900 whitespace-nowrap dark:text-gray-200">Username</td>
+                                <td class="px-6 py-4 text-lg text-gray-900 whitespace-nowrap dark:text-gray-200">{{ $pengajar->username }}</td>
                             </tr>
                             <tr class="dark:border-gray-700">
                                 <td class="px-6 py-4 text-lg font-bold text-gray-900 whitespace-nowrap dark:text-gray-200">No Telpon</td>
