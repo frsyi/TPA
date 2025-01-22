@@ -62,7 +62,7 @@ class IqraController extends Controller
         $request->validate([
             'siswa_id' => 'required|integer|exists:siswas,id',
             'jilid' => 'required|integer',
-            'halaman' => 'required|integer',
+            'halaman' => 'required|string|max:255',
             'nilai' => 'required|string|max:255',
             'catatan' => 'nullable|string',
         ]);
@@ -110,7 +110,7 @@ class IqraController extends Controller
         $request->validate([
             'siswa_id' => 'required|integer|exists:siswas,id',
             'jilid' => 'required|integer',
-            'halaman' => 'required|integer',
+            'halaman' => 'required|string|max:255',
             'nilai' => 'required|string|max:255',
             'catatan' => 'nullable|string',
         ]);

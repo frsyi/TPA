@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('siswa_id')->constrained('siswas');
             $table->foreignId('pengajar_id')->constrained('users');
             $table->integer('jilid');
-            $table->integer('halaman');
+            $table->string('halaman');
             $table->string('nilai');
             $table->text('catatan')->nullable();
             $table->timestamps();

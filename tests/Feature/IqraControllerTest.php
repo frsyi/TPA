@@ -32,7 +32,7 @@ class IqraControllerTest extends TestCase
         $response = $this->post(route('iqra.store'), [
             'siswa_id' => $siswa->id,
             'jilid' => 1,
-            'halaman' => 10,
+            'halaman' => '10',
             'nilai' => 'A',
             'catatan' => 'Bagus',
         ]);
@@ -63,7 +63,7 @@ class IqraControllerTest extends TestCase
         $response = $this->put(route('iqra.update', $iqra->id), [
             'siswa_id' => $iqra->siswa_id,
             'jilid' => 2,
-            'halaman' => 15,
+            'halaman' => '15',
             'nilai' => 'B',
             'catatan' => 'Perlu perbaikan',
         ]);
