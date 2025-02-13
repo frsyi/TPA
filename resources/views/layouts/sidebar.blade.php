@@ -2,7 +2,7 @@
     <nav class="flex flex-col h-full px-4 py-6 bg-light-background dark:bg-gray-900">
         <!-- Logo -->
         <div class="flex items-center justify-center h-16 bg-light-background dark:bg-gray-900">
-            <a href="{{ route('dashboard') }}" class="text-lg font-bold text-white">
+            <a href="{{ route('dashboard.index') }}" class="text-lg font-bold text-white">
                 <x-application-logo class="w-20 h-20 text-gray-500 fill-current" />
             </a>
         </div>
@@ -10,6 +10,12 @@
         <!-- Navigation -->
         <div class="flex-1 space-y-4">
             @canany(['admin', 'orangtua'])
+                <x-nav-link :href="route('dashboard.index')" :active="request()->routeIs('dashboard.index')">
+                    <div class="flex items-center">
+                        <x-heroicon-o-home class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"/>
+                        {{ __('Dashboard') }}
+                    </div>
+                </x-nav-link>
                 <x-nav-link :href="route('hafalan.index')" :active="request()->routeIs('hafalan.index')">
                     <div class="flex items-center">
                         <x-heroicon-o-book-open class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"/>

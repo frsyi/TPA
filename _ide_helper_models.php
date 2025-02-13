@@ -25,6 +25,7 @@ namespace App\Models{
  * @property-read \App\Models\Hafalan|null $hafalan
  * @property-read \App\Models\Iqra|null $iqra
  * @property-read \App\Models\User $pengajar
+ * @method static \Database\Factories\ActivityLogFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|ActivityLog newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ActivityLog newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|ActivityLog query()
@@ -37,6 +38,17 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|ActivityLog whereUpdatedAt($value)
  */
 	class ActivityLog extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|Dashboard newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Dashboard newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Dashboard query()
+ */
+	class Dashboard extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -60,6 +72,7 @@ namespace App\Models{
  * @property-read \App\Models\User $pengajar
  * @property-read \App\Models\Siswa $siswa
  * @property-read \App\Models\Surat $surat
+ * @method static \Database\Factories\HafalanFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Hafalan newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Hafalan newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Hafalan query()
@@ -86,7 +99,7 @@ namespace App\Models{
  * @property int $siswa_id
  * @property int $pengajar_id
  * @property int $jilid
- * @property int $halaman
+ * @property string $halaman
  * @property string $nilai
  * @property string|null $catatan
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -95,6 +108,7 @@ namespace App\Models{
  * @property-read int|null $activity_logs_count
  * @property-read \App\Models\User $pengajar
  * @property-read \App\Models\Siswa $siswa
+ * @method static \Database\Factories\IqraFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Iqra newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Iqra newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Iqra query()
@@ -123,6 +137,7 @@ namespace App\Models{
  * @property-read int|null $hafalans_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Surat> $surats
  * @property-read int|null $surats_count
+ * @method static \Database\Factories\JuzFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Juz newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Juz newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Juz query()
@@ -149,6 +164,7 @@ namespace App\Models{
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Iqra> $iqras
  * @property-read int|null $iqras_count
  * @property-read \App\Models\User|null $orangTua
+ * @method static \Database\Factories\SiswaFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Siswa newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Siswa newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Siswa query()
@@ -176,6 +192,7 @@ namespace App\Models{
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Hafalan> $hafalans
  * @property-read int|null $hafalans_count
  * @property-read \App\Models\Juz $juz
+ * @method static \Database\Factories\SuratFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Surat newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Surat newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Surat query()
@@ -198,8 +215,7 @@ namespace App\Models{
  * @property string $name
  * @property string|null $phone_number
  * @property string|null $role
- * @property string $email
- * @property string|null $email_verified_at
+ * @property string $username
  * @property mixed $password
  * @property string|null $remember_token
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -219,8 +235,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User query()
  * @method static \Illuminate\Database\Eloquent\Builder|User whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereEmail($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereEmailVerifiedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
@@ -229,6 +243,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRole($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereSiswaId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereUsername($value)
  */
 	class User extends \Eloquent {}
 }

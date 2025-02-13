@@ -63,6 +63,12 @@
                                     Kelas
                                 </th>
                                 <th scope="col" class="px-6 py-3">
+                                    Jilid
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Halaman
+                                </th>
+                                <th scope="col" class="px-6 py-3">
                                     Pengajar
                                 </th>
                                 <th scope="col" class="px-6 py-3">
@@ -81,6 +87,12 @@
                                     </td>
                                     <td class="px-6 py-4">
                                         {{ $iqra->siswa->kelas }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $iqra->jilid }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $iqra->halaman }}
                                     </td>
                                     <td class="px-6 py-4">
                                         {{ $iqra->pengajar->name }}
@@ -107,7 +119,7 @@
                                 </tr>
                             @empty
                                 <tr class="bg-white dark:bg-gray-800">
-                                    <td colspan="5" class="px-6 py-4 text-center text-gray-900 dark:text-white">
+                                    <td colspan="7" class="px-6 py-4 text-center text-gray-900 dark:text-white">
                                         Belum ada data iqra
                                     </td>
                                 </tr>

@@ -8,6 +8,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\OrangtuaController;
 use App\Http\Controllers\PengajarController;
 use App\Http\Controllers\ActivityLogController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    Route::resource('dashboard', DashboardController::class);
     Route::resource('pengajar', PengajarController::class);
     Route::resource('siswa', SiswaController::class);
     Route::resource('hafalan', HafalanController::class);

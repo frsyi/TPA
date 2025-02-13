@@ -63,6 +63,18 @@
                                     Kelas
                                 </th>
                                 <th scope="col" class="px-6 py-3">
+                                    Juz
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Surat
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Mulai Ayat
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Sampai Ayat
+                                </th>
+                                <th scope="col" class="px-6 py-3">
                                     Pengajar
                                 </th>
                                 <th scope="col" class="px-6 py-3">
@@ -81,6 +93,18 @@
                                     </td>
                                     <td class="px-6 py-4">
                                         {{ $hafalan->siswa->kelas }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $hafalan->juz->juz }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $hafalan->surat->nama_surat }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $hafalan->surat->mulai_ayat }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $hafalan->surat->akhir_ayat }}
                                     </td>
                                     <td class="px-6 py-4">
                                         {{ $hafalan->pengajar->name }}
@@ -107,7 +131,7 @@
                                 </tr>
                             @empty
                                 <tr class="bg-white dark:bg-gray-800">
-                                    <td colspan="5" class="px-6 py-4 text-center text-gray-900 dark:text-white">
+                                    <td colspan="9" class="px-6 py-4 text-center text-gray-900 dark:text-white">
                                         Belum ada data hafalan
                                     </td>
                                 </tr>
