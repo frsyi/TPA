@@ -13,9 +13,18 @@ class PengajarController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $pengajars = User::where('role', User::ROLE_PENGAJAR)->paginate(10);
+        $query = User::where('role', User::ROLE_PENGAJAR);
+
+        if ($request->has('search')) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%$search%");
+            });
+        }
+
+        $pengajars = $query->paginate(10);
         return view('pengajar.index', compact('pengajars'));
     }
 

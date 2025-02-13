@@ -37,7 +37,25 @@
             </div>
             @endcan
 
-            <!-- Grafik Progres Hafalan -->
+            <div class="flex justify-between mb-4">
+                <form method="GET" action="{{ route('dashboard.index') }}" class="flex space-x-2">
+                    <input type="month" name="bulan" value="{{ $bulanDipilih }}" class="px-4 py-2 border rounded">
+                    <button type="submit" class="px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-700">
+                        Filter
+                    </button>
+                </form>
+                <div>
+                    <a href="{{ route('dashboard.index', ['bulan' => $bulanSebelumnya]) }}"
+                       class="px-4 py-2 mr-2 text-white bg-gray-500 rounded hover:bg-gray-700">
+                        &laquo; Bulan Sebelumnya
+                    </a>
+                    <a href="{{ route('dashboard.index', ['bulan' => $bulanBerikutnya]) }}"
+                       class="px-4 py-2 text-white bg-gray-500 rounded hover:bg-gray-700">
+                        Bulan Berikutnya &raquo;
+                    </a>
+                </div>
+            </div>
+
             <div class="overflow-hidden bg-white shadow-sm dark:bg-gray-800 sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <h3 class="mb-4 text-lg font-semibold">Progres Hafalan Siswa per Bulan</h3>
@@ -46,7 +64,6 @@
             </div>
 
             @can('admin')
-            <!-- Grafik Progres Hafalan Siswa dalam Satu Bulan -->
             <div class="mt-6 overflow-hidden bg-white shadow-sm dark:bg-gray-800 sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     <h3 class="mb-4 text-lg font-semibold">Progres Hafalan Siswa Bulan {{ $bulanSekarang }}</h3>

@@ -28,6 +28,23 @@
                     </div>
                 </div>
 
+                <div class="p-6">
+                    <form method="GET" action="{{ route('pengajar.index') }}">
+                        <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+                            <div>
+                                <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari pengajar"
+                                    class="w-full px-4 py-2 border rounded-lg dark:bg-gray-700 dark:text-gray-200">
+                            </div>
+                            <div>
+                                <button type="submit"
+                                    class="w-full px-4 py-2 text-white bg-gray-800 rounded-lg dark:bg-blue-600 hover:bg-gray-700 dark:hover:bg-blue-700">
+                                    Search
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
                 <div class="relative overflow-x-auto">
                     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">

@@ -5,25 +5,25 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Siswa;
 use App\Models\Hafalan;
-use App\Models\Dashboard;
-use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(Request $request)
     {
         $user = Auth::user();
         $progresHafalanSiswa = null;
+        $bulanDipilih = $request->query('bulan', Carbon::now()->format('Y-m'));
+        $bulan = Carbon::parse($bulanDipilih)->month;
+        $tahun = Carbon::parse($bulanDipilih)->year;
 
         if ($user->role === User::ROLE_ORANGTUA) {
             $siswa = $user->siswa;
 
             $progresHafalanBulanan = Hafalan::where('siswa_id', $siswa->id)
+                ->whereYear('created_at', $tahun)
                 ->selectRaw('MONTH(created_at) as bulan, COUNT(*) as total_hafalan')
                 ->groupBy('bulan')
                 ->orderBy('bulan')
@@ -37,9 +37,10 @@ class DashboardController extends Controller
         } else {
             $jumlahSiswa = Siswa::count();
             $jumlahPengajar = User::where('role', 'pengajar')->count();
-            $bulanSekarang = Carbon::now()->translatedFormat('F Y');
+            $bulanSekarang = Carbon::parse($bulanDipilih)->translatedFormat('F Y');
 
-            $progresHafalanBulanan = Hafalan::selectRaw('MONTH(created_at) as bulan, COUNT(*) as total_hafalan')
+            $progresHafalanBulanan = Hafalan::whereYear('hafalans.created_at', $tahun)
+                ->selectRaw('MONTH(created_at) as bulan, COUNT(*) as total_hafalan')
                 ->groupBy('bulan')
                 ->orderBy('bulan')
                 ->get()
@@ -50,7 +51,8 @@ class DashboardController extends Controller
                     ];
                 })->toArray();
 
-            $progresHafalanSiswa = Hafalan::whereMonth('hafalans.created_at', Carbon::now()->month)
+            $progresHafalanSiswa = Hafalan::whereYear('hafalans.created_at', $tahun)
+                ->whereMonth('hafalans.created_at', $bulan)
                 ->join('siswas', 'hafalans.siswa_id', '=', 'siswas.id')
                 ->selectRaw('siswas.nama as nama_siswa, COUNT(hafalans.id) as total_hafalan')
                 ->groupBy('siswas.nama')
@@ -59,84 +61,18 @@ class DashboardController extends Controller
                 ->toArray();
         }
 
+        $bulanSebelumnya = Carbon::parse($bulanDipilih)->subMonth()->format('Y-m');
+        $bulanBerikutnya = Carbon::parse($bulanDipilih)->addMonth()->format('Y-m');
+
         return view('dashboard', [
             'jumlahSiswa' => $jumlahSiswa ?? null,
             'jumlahPengajar' => $jumlahPengajar ?? null,
             'progresHafalanBulanan' => json_encode($progresHafalanBulanan, JSON_UNESCAPED_UNICODE),
             'progresHafalanSiswa' => json_encode($progresHafalanSiswa, JSON_UNESCAPED_UNICODE) ?? null,
             'bulanSekarang' => $bulanSekarang ?? null,
+            'bulanDipilih' => $bulanDipilih,
+            'bulanSebelumnya' => $bulanSebelumnya,
+            'bulanBerikutnya' => $bulanBerikutnya,
         ]);
-    }
-
-    // public function index()
-    // {
-    //     $jumlahSiswa = Siswa::count();
-    //     $jumlahPengajar = User::where('role', 'pengajar')->count();
-
-    //     // Progres Hafalan Per Bulan
-    //     $progresHafalanBulanan = Hafalan::selectRaw('MONTH(created_at) as bulan, COUNT(*) as total_hafalan')
-    //         ->groupBy('bulan')
-    //         ->orderBy('bulan')
-    //         ->get()
-    //         ->map(function ($item) {
-    //             return [
-    //                 'bulan' => Carbon::create()->month($item->bulan)->translatedFormat('F'), // Nama bulan
-    //                 'total_hafalan' => $item->total_hafalan
-    //             ];
-    //         })->toArray(); // Ubah Collection menjadi array
-
-    //     return view('dashboard', [
-    //         'jumlahSiswa' => $jumlahSiswa,
-    //         'jumlahPengajar' => $jumlahPengajar,
-    //         'progresHafalanBulanan' => json_encode($progresHafalanBulanan) // Pastikan dalam format JSON
-    //     ]);
-    // }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Dashboard $dashboard)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Dashboard $dashboard)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Dashboard $dashboard)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Dashboard $dashboard)
-    {
-        //
     }
 }

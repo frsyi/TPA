@@ -12,9 +12,21 @@ class OrangtuaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $orangtuas = User::where('role', User::ROLE_ORANGTUA)->paginate(10);
+        $query = User::where('role', User::ROLE_ORANGTUA);
+
+        if ($request->has('search')) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%$search%")
+                    ->orWhereHas('siswa', function ($siswaQuery) use ($search) {
+                        $siswaQuery->where('nama', 'like', "%$search%");
+                    });
+            });
+        }
+
+        $orangtuas = $query->paginate(10);
         return view('orangtua.index', compact('orangtuas'));
     }
 

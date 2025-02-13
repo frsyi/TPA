@@ -10,10 +10,26 @@ class SiswaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $siswas = Siswa::paginate(10);
-        return view('siswa.index', compact('siswas'));
+        $query = Siswa::query();
+
+        // Filter berdasarkan nama
+        if ($request->filled('search')) {
+            $query->where('nama', 'like', '%' . $request->search . '%');
+        }
+
+        // Filter berdasarkan kelas
+        if ($request->filled('kelas')) {
+            $query->where('kelas', $request->kelas);
+        }
+
+        $siswas = $query->paginate(10);
+
+        // Ambil daftar kelas unik untuk filter dropdown
+        $kelasList = Siswa::select('kelas')->distinct()->pluck('kelas');
+
+        return view('siswa.index', compact('siswas', 'kelasList'));
     }
 
     /**
